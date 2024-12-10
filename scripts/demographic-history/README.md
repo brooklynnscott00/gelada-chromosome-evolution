@@ -11,10 +11,10 @@ VCF
 make a combined gvcf for dadi animals
 
 ## make vcfs with variant-sites and all-sites
-'''
+```
 sbatch scripts/call-variants.sh
 sbatch scripts/call-allsites.sh
-'''
+```
 go back and edit these files with the config file and proper file paths
 
 
