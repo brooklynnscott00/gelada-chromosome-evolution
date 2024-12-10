@@ -1,0 +1,4 @@
+*
+!.gitignore
+!processed_data
+!raw_data

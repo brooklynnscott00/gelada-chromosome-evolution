@@ -1,7 +1,0 @@
-data/*
-data/raw_data/*
-data/processed_data/*
-!data/raw_data
-!data/processed_data
-logs/*
-!logs/processed_data
