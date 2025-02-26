@@ -13,12 +13,10 @@
 
 module load gatk-4.2.6.1-gcc-11.2.0
 
-genome_path="/scratch/klchiou/brooklynn/genome/Tgel_1.0.dna.fa"
-
 gatk --java-options "-Xmx32g" VariantFiltration \
 	--reference ${genome_path} \
-	--output  /scratch/brscott4/gelada/data/gvcf-dadi-combined/final.quality_filtered.vcf.gz \
-	--variant  /scratch/brscott4/gelada/data/gvcf-dadi-combined/final.vcf.gz \
+	--output  results/dadi-cohort.quality_filtered.vcf.gz \
+	--variant  results/dadi-cohort.vcf.gz \
 	--filter-name "QD" \
 	--filter "QD < 2.0" \
 	--filter-name "MQ" \

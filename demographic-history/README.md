@@ -15,25 +15,21 @@ make a combined gvcf for dadi animals
 sbatch scripts/call-variants.sh
 sbatch scripts/call-allsites.sh
 ```
-go back and edit these files with the config file and proper file paths
+go back and edit these files with the gvcf portion and the slurm stuff
 
 ```
 sbatch gatk_variantFiltration.sh
 ```
-go back and edit with the config gile and proper file paths
+go back and edit the slurm stuff
 
 # remove missing data
 # biallelic 
 
 ```
-module load bcftools-1.14-gcc-11.2.0
-bcftools view --apply-filters .,PASS final.quality_filtered.vcf.gz -m2 -M2 --genotype ^miss --include 'TYPE="snp"' --output-type z --output-file final.quality_filtered.pass.biallelic.vcf.gz
+sbatch scritps/filter-vcf.sh
 ```
-- Removes all the variants that don't pass quality score and only biallelic sites. go back and change file names etx. to make sure it's all right 
-
-# remove repeats
-# remove exons
-
+go back and edit slurm stuff
+add the repeat filtering and add the exon filtering. make sure there is an output for each step
 
 '''sbatch scripts/bedtools-subtract-repeats.sh'''     jobID: 12179560     **DONE**
 - path: /scratch/brscott4/gelada/data/gvcf-dadi-combined/final.quality_filtered.pass.biallelic.rm_repeats.vcf.gz
