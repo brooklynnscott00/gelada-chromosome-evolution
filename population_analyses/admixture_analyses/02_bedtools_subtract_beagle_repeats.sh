@@ -25,6 +25,7 @@ module load bedtools2-2.30.0-gcc-11.2.0
 
 mkdir -p beagle_bed_rmrep
 
+# subtract repeat regions
 bedtools subtract \
 	-a beagle_bed/angsd_genolike_region_${chr}_${i}.bed \
 	-b genomes/Theropithecus_gelada.Tgel_1.0.dna_rm_reindexed_refseq.bed > \

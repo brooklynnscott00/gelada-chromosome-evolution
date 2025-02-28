@@ -1,4 +1,4 @@
-## Scripts to run admixture analyses with NGSadmix
+## Scripts to run angsd analysis
 
 #### Files to prepare:
 
