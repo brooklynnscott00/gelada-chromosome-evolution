@@ -22,31 +22,21 @@ NC_037668.1:1-3000000	FRZ004	/path/to/bam/
 #### Analysis pipeline
 
 ```
-sbatch --array=76-947 01_call-angsd.sh```
-cat data/angsd_noheader/*NC_037668.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037668.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037669.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037669.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037670.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037670.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037671.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037671.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037672.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037672.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037673.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037673.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037674.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037674.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037675.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037675.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037676.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037676.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037677.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037677.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037678.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037678.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037679.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037679.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037680.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037680.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037680.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037680.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037681.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037681.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037682.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037682.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037683.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037683.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037684.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037684.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037685.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037685.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037686.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037686.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037687.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037687.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037688.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037688.1.full_chr.beagle.gz
-cat data/angsd_noheader/*NC_037689.1*beagle.gz > data/angsd_noheader/angsd_genolike_NC_037689.1.full_chr.beagle.gz
+sbatch --array=1-947 01_call-angsd.sh
+sbatch --array=1-947 --mem=16G 02_bedtools_subtract_beagle_repeats.sh
+
+mkdir -p angsd_chr
+for i in $(cut -f 1 genomes/Theropithecus_gelada.Tgel_1.0.dna.toplevel_reindexed_refseq.fa.fai | head -n22); do
+	echo $i; cat rmrep/angsd_genolike_region_${i}_*_rmrep.beagle.gz > angsd_chr/angsd_genolike_${i}.beagle.gz
+done
+
+sbatch --array=1-22 --mem=16G 03_thin_variants.sh 10000
+
+zcat $(ls --color=none angsd_single/*.beagle.gz | head -n1) | head -n1 | gzip -c > angsd_thinned/header.beagle.gz
+
+mkdir -p angsd_final
+cat angsd_thinned/header.beagle.gz $(ls --color=none angsd_thinned/angsd_genolike_*_thinned.beagle.gz | grep -v NC_037689.1 | xargs) > angsd_final/angsd_genolike_autosomes.beagle.gz
+
+sbatch --array=2-5 --mem=64G --cpus-per-task=48 ngsadmix-run.sh
 
 ```
-
-
