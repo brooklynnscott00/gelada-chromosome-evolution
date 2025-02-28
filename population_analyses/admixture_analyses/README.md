@@ -37,6 +37,10 @@ zcat $(ls --color=none angsd_single/*.beagle.gz | head -n1) | head -n1 | gzip -c
 mkdir -p angsd_final
 cat angsd_thinned/header.beagle.gz $(ls --color=none angsd_thinned/angsd_genolike_*_thinned.beagle.gz | grep -v NC_037689.1 | xargs) > angsd_final/angsd_genolike_autosomes.beagle.gz
 
-sbatch --array=2-5 --mem=64G --cpus-per-task=48 ngsadmix-run.sh
+sbatch --array=2-5 --mem=64G --cpus-per-task=48 04_run_ngsadmix.sh
+
+sbatch --mem=64G --cpus-per-task=48 05_pcangsd-run.sh
+
+06_angsd-plot.R
 
 ```
