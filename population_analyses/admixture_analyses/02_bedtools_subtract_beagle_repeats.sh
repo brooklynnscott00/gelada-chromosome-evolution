@@ -9,16 +9,15 @@
 #SBATCH --qos=public
 #SBATCH --time=4:00:00
 
-this_region=$(cut -f 1 /scratch/brscott4/gelada/data/sample_region_list_nobaboons.txt | uniq | sed -n ${SLURM_ARRAY_TASK_ID}p)
-chr=$(echo $this_region | cut -d : -f 1)
-i=$(printf '%04d\n' ${SLURM_ARRAY_TASK_ID})
-
-# if [ -z "$1" ]; then min_maf=0.01; else min_maf=$1; fi
+# define region, chromosome, and i so we can keep the regions in the proper order
+this_region=$(cut -f 1 /scratch/brscott4/gelada/data/sample_region_list_nobaboons.txt | uniq | sed -n ${SLURM_ARRAY_TASK_ID}p) # extracts chromsome ID and region specific coordinates
+chr=$(echo $this_region | cut -d : -f 1) # extracts chromosome ID
+i=$(printf '%04d\n' ${SLURM_ARRAY_TASK_ID}) # prints the slurm array task ID as a 4 digit number and assigns it to i
 
 module load mamba/latest
 
 # custom python script to convert beagle file into a bed file
-scripts/beagle-to-bed.py angsd/angsd_genolike_region_${chr}.${i}_maf_${min_maf}.beagle.gz beagle_bed/angsd_genolike_region_${chr}.${i}_maf_${min_maf}.beagle.bed
+scripts/beagle-to-bed.py angsd/angsd_genolike_region_${chr}.${i}.beagle.gz beagle_bed/angsd_genolike_region_${chr}.${i}.beagle.bed
 
 module purge
 module load bedtools2-2.30.0-gcc-11.2.0
