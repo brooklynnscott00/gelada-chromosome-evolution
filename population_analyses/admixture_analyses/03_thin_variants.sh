@@ -9,8 +9,10 @@
 #SBATCH --qos=public
 #SBATCH --time=4:00:00
 
+# extract chromosome IDs
 chr=$(cut -f 1 genomes/Theropithecus_gelada.Tgel_1.0.dna.toplevel_reindexed_refseq.fa.fai | head -n22 | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
+# if nothing is specified use 10000 
 if [ -z "$1" ]; then prune_dist=10000; else prune_dist=$1; fi
 
 module load mamba/latest
