@@ -1,24 +1,5 @@
 # Scripts to run angsd analysis
 
-### Files to prepare:
-
-`sample_region_list_nobaboons.txt` This is per sample genomic region list that specifies genomic regions assinged to individual samples in the dataset, along with their corresponding bam files. In this case our genome is broken into a total of 947 regions.
-
-```
-$ head sample_region_list_nobaboons.txt
-NC_037668.1:1-3000000	CHK001	/path/to/bam/
-NC_037668.1:1-3000000	CHK002	/path/to/bam/
-NC_037668.1:1-3000000	CHK003	/path/to/bam/
-NC_037668.1:1-3000000	CHK004	/path/to/bam/
-NC_037668.1:1-3000000	CHK005	/path/to/bam/
-NC_037668.1:1-3000000	FRZ000	/path/to/bam/
-NC_037668.1:1-3000000	FRZ001	/path/to/bam/
-NC_037668.1:1-3000000	FRZ002	/path/to/bam/
-NC_037668.1:1-3000000	FRZ003	/path/to/bam/
-NC_037668.1:1-3000000	FRZ004	/path/to/bam/
-
-```
-
 ### Analysis pipeline
 
 ##### Step 1

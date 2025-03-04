@@ -15,7 +15,7 @@
 export PATH=$PATH:~/programs/angsd/
 
 # define region, chromosome, and i so we can keep the regions in the proper order
-this_region=$(cut -f 1 data/sample_region_list_nobaboons.txt | uniq | sed -n ${SLURM_ARRAY_TASK_ID}p) # extracts chromosome ID and region coordinates
+this_region=$(cut -f 1 data/sample_region_list_final.txt | uniq | sed -n ${SLURM_ARRAY_TASK_ID}p) # extracts chromosome ID and region coordinates
 chr=$(echo $this_region | cut -d : -f 1) # extracts only the chromosome ID
 i=$(printf '%04d\n' ${SLURM_ARRAY_TASK_ID}) # prints the slurm array task ID as a 4 digit number and assigns it to i
 
@@ -23,7 +23,7 @@ mkdir -p data/sample_lists
 
 # extract sample names for specific region, construct a bam file path for each sample name, and save the path into a new txt file based on region
 # output is a list of bams for a particular region
-awk '$1 ~ /'${this_region}'/{print}' data/sample_region_list_nobaboons.txt | cut -f 2 | sed -E 's:(.*):'$(pwd)'/data/sample_region_bams/\1_'$(echo $this_region | sed 's/:/./')'.bam:' > data/sample_lists/samples_region_$(echo ${this_region} | sed 's/:/_/').txt
+awk '$1 ~ /'${this_region}'/{print}' data/sample_region_list_final.txt | cut -f 2 | sed -E 's:(.*):'$(pwd)'/data/sample_region_bams/\1_'$(echo $this_region | sed 's/:/./')'.bam:' > data/sample_lists/samples_region_$(echo ${this_region} | sed 's/:/_/').txt
 
 mkdir -p data/angsd
 mkdir -p data/angsd_noheader
