@@ -65,11 +65,13 @@ sbatch scripts/bedtools-subtract-exons_10k_extended.sh       jobID: 12171926
 ```shell
 sbatch population_analyses/divergence_analyses/04_dadi-IM.sh
 sbatch population_analyses/divergence_analyses/04_dadi-no_mig.sh
-
+sbatch population_analyses/divergence_analyses/04_dadi-sym_mig.sh
+sbatch population_analyses/divergence_analyses/04_dadi-no_mig_size.sh
 ```
+run dadi-cli to test 4 different two population models
 
-sbatch scripts/run-dadi-demog-sym_mig.sh        jobID: 12218843     **DONE**
-sbatch scripts/run-dadi-demog-no_mig_size.sh        jobID: 12586741 **give up**
+********(go in and edit file paths to reflect sfs)
+
 
 ##### Step 5 Bootstrapping
 sbatch scripts/run-dadi-bootstrapping.sh
