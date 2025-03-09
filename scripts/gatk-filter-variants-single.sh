@@ -55,8 +55,8 @@ rm -rf $tmp_dir
 
 fi
 
-# snv are SNVs
-
+# snv are SNVs 
+# includes non biallelic sites
 if [ ! -f vcf-split/${dataset}.${genome}.bootstrap.region.${int}.chr${chr}.snv.vcf.gz.tbi ]; then
 
 tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)

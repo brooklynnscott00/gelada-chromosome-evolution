@@ -30,10 +30,12 @@ mkdir -p vcf-chr
 module load bcftools/1.15.1
 module load htslib/1.15.1
 
+# pass genotyping and quality filters
 bcftools concat -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz $(for i in $(grep --color=none -nE '^'${chr}':' data/${genome}_regions.txt | cut -d ':' -f 1); do echo vcf-split/${dataset}.${genome}.bootstrap.region.$(printf "%04d" $i | xargs).chr${chr_print}.pas.vcf.gz; done)
 
 tabix -p vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz
 
+# no quality filters
 bcftools concat -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv.vcf.gz $(for i in $(grep --color=none -nE '^'${chr}':' data/${genome}_regions.txt | cut -d ':' -f 1); do echo vcf-split/${dataset}.${genome}.bootstrap.region.$(printf "%04d" $i | xargs).chr${chr_print}.snv.vcf.gz; done)
 
 tabix -p vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv.vcf.gz

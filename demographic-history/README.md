@@ -9,6 +9,18 @@
 VCF
 
 make a combined gvcf for dadi animals
+AFTER GATK CALL
+run `combine-gvcfs-dadi.sh`
+run `scripts/call-allsites.sh`
+
+remove repetitive regions
+remove exons +-10k
+Then count the number of sites = callable sites
+
+
+Dadi input VCFS. Filter this VCF for dadi cohort animals:
+vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz
+Then remove repetitive regions and exons
 
 ## make vcfs with variant-sites and all-sites
 ```
