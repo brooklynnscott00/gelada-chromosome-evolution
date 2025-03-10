@@ -11,8 +11,8 @@
 
 ##### Step 2 Get # of callable sites
 
-`sbatch population_analyses/divergence_analyses/01_dadi-combine-gvcfs.sh` Combine gvcfs from the cohort of animals that are used in dadi-cli analyses
-
+`sbatch 05_dadi-combine-gvcfs.sh` Combine gvcfs from the cohort of animals that are used in dadi-cli analyses
+`sbatch 06_dadi-gatk-call-all-sites.sh`
 `Call all sites`
 `Remove repetitive regions`
 `Remove exons`

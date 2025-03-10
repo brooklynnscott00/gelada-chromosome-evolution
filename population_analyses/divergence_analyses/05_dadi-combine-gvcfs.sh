@@ -40,4 +40,4 @@ gatk CombineGVCFs \
    --variant gvcf-all/SKR030.tgel1.all.raw.g.vcf.gz \
    --variant gvcf-all/SKR038.tgel1.all.raw.g.vcf.gz \
    --variant gvcf-all/SKR039.tgel1.all.raw.g.vcf.gz \
-   -O gvcf-dadi-combined/dadi-cohort.g.vcf.gz
+   -O gvcf-dadi-combined/${dataset}-cohort.g.vcf.gz
