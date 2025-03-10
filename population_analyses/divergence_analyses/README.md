@@ -16,7 +16,7 @@ MAKE SURE TO ALSO FILTER FOR ONLY AUTOSOMES
 
 ##### Step 2 Get # of callable sites
 
-
+`sbatch population_analyses/divergence_analyses/01_dadi-combine-gvcfs.sh` Combine gvcfs from the cohort of animals that are used in dadi-cli analyses
 
 
 Callable sites call-all-sites.sh
