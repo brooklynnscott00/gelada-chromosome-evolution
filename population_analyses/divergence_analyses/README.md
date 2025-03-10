@@ -4,21 +4,10 @@
 
 ##### Step 1 Prepare input VCF
 
-`sbatch --array=1-22 01_dadi-make-vcf.sh`
-
-
-- then in the nect script, remove X chromosme, filter for regions
-
-`sbatch 
-subset vcf to include dadi animals
-
-
-'''sbatch scripts/bedtools-subtract-repeats.sh'''     jobID: 12179560     **DONE**
-
-'''sbatch scripts/bedtools-subtract-exons_10k_extended.sh'''      jobID: 12179791     **DONE**
-
-MAKE SURE TO ALSO FILTER FOR ONLY AUTOSOMES
-VCF PATH: `vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz`
+`sbatch --array=1-22 01_dadi-make-vcf.sh` make a vcf with subset of animals that will be included in the dadi analysis
+`sbatch 02_dadi-filter-vcf-autosomes.sh` filter vcf to remove X chromsome
+`sbatch 03_dadi-filter-vcf-subtract_repeats.sh` 
+`sbatch 04_dadi-filter-vcf-subtract_exons_10k_extended` 
 
 ##### Step 2 Get # of callable sites
 
