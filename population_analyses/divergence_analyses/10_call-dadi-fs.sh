@@ -15,13 +15,15 @@ module load mamba/latest
 source activate /scratch/nsnyderm/conda_env/dadi-gpu
 dadi-cli -h
 
+source scripts/_include_options.sh
+mkdir -p dadi_results/
+
 popfile='data/NOR.CEN.22.popfile.txt'
-vcf='/scratch/brscott4/gelada/dadi-cli/data/vcfs/autosomes.quality_filtered.pass.biallelic.rm_repeats.rm_exons_10k_extended.vcf.gz'
 
 dadi-cli GenerateFs \
-    --vcf ${vcf} \
+    --vcf dadi-vcf/${dataset}.NOR.CEN.22.merged.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf \
     --pop-info ${popfile} \
     --pop-ids NOR CEN \
     --projections 22 22 \
-    --output /scratch/brscott4/gelada/dadi-cli/autosomes/autosomes_noncoding.folded.fs
+    --output dadi_results/${dataset}_autosomes_noncoding.folded.fs
     

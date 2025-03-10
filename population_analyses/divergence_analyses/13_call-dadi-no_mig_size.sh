@@ -14,13 +14,13 @@
 module load mamba/latest
 source activate /data/CEM/smacklab/libraries/python/.conda/envs/dadi-cli-gpu
 
-finalfreqspec="data/dadi/fs_results/NOR.CEN.22.neutral_regions.folded.final.fs"
+source scripts/_include_options.sh
 
-dadi-cli InferDM --fs ${finalfreqspec} \
+dadi-cli InferDM --fs dadi_results/${dataset}_autosomes_noncoding.folded.fs \
     --model no_mig_size \
     --nomisid \
     --lbounds 1e-5 1e-8 1e-2 1e-2 1e-8 1e-3 \
     --ubounds 1e-3 1e-6 0.99 0.99 1e-6 1e-1 \
-    --output /scratch/brscott4/gelada/data/dadi/demog_final/NOR.CEN.no_migration_size_change.neutral.demo.params \
+    --output dadi_results/${dadaset}_autosomes_noncoding_no-mig-size.demo.params \
     --force-convergence 128 \
     --cpus 16

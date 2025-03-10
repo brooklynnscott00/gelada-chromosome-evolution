@@ -23,25 +23,19 @@ zcat gvcf-dadi-combined/dadi.allsites.nogeno.autosomes.rm_repeats.rm_exons_10k_e
 # count number of callable sites in the genome, excluding repetitive regions and exons 10k extended
 wc -l gvcf-dadi-combined/dadi.allsites.nogeno.autosomes.rm_repeats.rm_exons_10k_extended.bed
 
-```
+``` 
 
 ##### Step 3 Prepare SFS
-`sbatch population_analyses/divergence_analyses/03_run-dadi-fs.sh` run dadi to GenerateFs in dadi format
-
-*********(need to edit the path to the vcf after filtering steps)
-*********(possible also edit paths to the final sfs output)
+`sbatch 10_call-dadi-fs.sh` run dadi to GenerateFs in dadi format
 
 ##### Step 4 Run dadi-cli two population models 
 ```shell
-sbatch population_analyses/divergence_analyses/04_dadi-IM.sh
-sbatch population_analyses/divergence_analyses/04_dadi-no_mig.sh
-sbatch population_analyses/divergence_analyses/04_dadi-sym_mig.sh
-sbatch population_analyses/divergence_analyses/04_dadi-no_mig_size.sh
+sbatch 11_call-dadi-IM.sh
+sbatch 12_call-dadi-no_mig.sh
+sbatch 13_call-dadi-no-mig-size.sh
+sbatch 14_call-dadi-sym-mig.sh
 ```
 run dadi-cli to test 4 different two population models
-
-********(go in and edit file paths to reflect sfs)
-
 
 ##### Step 5 Bootstrapping
 sbatch scripts/run-dadi-bootstrapping.sh
