@@ -4,19 +4,29 @@
 
 ##### Step 1 Prepare input VCF
 
+`sbatch --array=1-22 01_dadi-make-vcf.sh`
+- come back and fix the last part, make a file that lists the file path for everything except then uses that for info for bcftools concat so it knows which files to use -
 
+- then in the nect script, remove X chromosme, filter for regions
+
+`sbatch 
 subset vcf to include dadi animals
+
 
 '''sbatch scripts/bedtools-subtract-repeats.sh'''     jobID: 12179560     **DONE**
 
 '''sbatch scripts/bedtools-subtract-exons_10k_extended.sh'''      jobID: 12179791     **DONE**
 
 MAKE SURE TO ALSO FILTER FOR ONLY AUTOSOMES
-
+VCF PATH: `vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz`
 
 ##### Step 2 Get # of callable sites
 
 `sbatch population_analyses/divergence_analyses/01_dadi-combine-gvcfs.sh` Combine gvcfs from the cohort of animals that are used in dadi-cli analyses
+
+`Call all sites`
+`Remove repetitive regions`
+`Remove exons`
 
 
 Callable sites call-all-sites.sh
