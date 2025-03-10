@@ -13,46 +13,17 @@
 
 `sbatch 05_dadi-combine-gvcfs.sh` Combine gvcfs from the cohort of animals that are used in dadi-cli analyses
 `sbatch 06_dadi-gatk-call-all-sites.sh`
-`Call all sites`
-`Remove repetitive regions`
-`Remove exons`
+`sbatch 07_dadi-filter-allsitesVCF-autosomes.sh`
+`sbatch 08_dadi-filter-allsitesVCF-subtract_repeats.sh`
+`sbatch 09_dadi-filter-allistesVCF-subtract_exons_10k_extended.sh`
 
+```shell
+zcat gvcf-dadi-combined/dadi.allsites.nogeno.autosomes.rm_repeats.rm_exons_10k_extended.vcf |tail -n +15352 |awk '{FS="\t";OFS="\t";print $1,$2-1,$2}' > gvcf-dadi-combined/dadi.allsites.nogeno.autosomes.rm_repeats.rm_exons_10k_extended.bed
 
-Callable sites call-all-sites.sh
+# count number of callable sites in the genome, excluding repetitive regions and exons 10k extended
+wc -l gvcf-dadi-combined/dadi.allsites.nogeno.autosomes.rm_repeats.rm_exons_10k_extended.bed
 
-'''sbatch scripts/call-all-sites.sh'''        jobID: 11837302     **DONE**
-path: /scratch/brscott4/gelada/data/gvcf-dadi-combined/final.allsites.nogeno.vcf.gz
-
-
-## counting the number of callable sites in the neutral regions of the genome
-
-'''sbatch scripts/bedtools-merge-allsites.sh'''     jobID: 12599409     **DONE**
-merge the bed file in to regions 
-
-'''sbatch scripts/bedtools-make-neutral-regions-bed.sh''' jobID: 12628445   **DONE**
-remove the low quality/repeats/exons 10k extended
-
-'''awk '{sum+=$3;sum1+=$2;} END{print sum-sum1;}' final.allsites.nogeno.filtered.pass.biallelic.rm_repeats.rm_exons_10k_extended.bed'''
-number of callable sites in the neutral genome = 610270154
-
-number of callable sites in the neutral genome = 610270154
-
-NEUTRAL REGIONS:
-### filter vcf for repeats
-sbatch scripts/bedtools-subtract-repeats.sh   jobID: 11062541     **DONE** 
-### filter vcf callable region variants for repeats
-sbatch scripts/bedtools-subtract-repeats.sh     jobID: 12170803
-
-### filter vcf for exons 10k extended
-sbatch scripts/bedtools-subtract-exons_10k_extended.sh   jobID: 11063373    **DONE**
-### filter vcf callable region variants for exons 10k extended
-sbatch scripts/bedtools-subtract-exons_10k_extended.sh       jobID: 12171926
-
-### path to vcf input:
-/scratch/brscott4/gelada/data/vcf/NOR.CEN.22.rm_missing.biallelic.rm_repeats.rm_exons_10k_extended.vcf
-
-
-
+```
 
 ##### Step 3 Prepare SFS
 `sbatch population_analyses/divergence_analyses/03_run-dadi-fs.sh` run dadi to GenerateFs in dadi format
