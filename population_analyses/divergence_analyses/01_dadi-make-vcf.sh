@@ -27,14 +27,16 @@ else
 chr_out=$chr_print
 fi 
 
+mkdir -p dadi-vcf-chr/
 mkdir -p dadi-vcf/
 
 # filter vcfs for only the samples inlcuded in the dadi list
-bcftools view -S ${samples} vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz > dadi-vcf/dadi.NOR.CEN.22.ch${chr_out}.pas.vcf.gz
+bcftools view -S ${samples} vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz > dadi-vcf-chr/${dataset}.NOR.CEN.22.chr${chr_out}.pas.vcf.gz
 
 # concat and index
 if [ "$SLURM_ARRAY_TASK_ID" -eq 22 ]; then
-	bcftools concat -Oz -o dadi-vcf/dadi.NOR.CEN.22.merged.vcf.gz dadi-vcf/dadi.NOR.CEN.22.ch*.pas.vcf.gz
-	bcftools index dadi-vcf/dadi.NOR.CEN.22.merged.vcf.gz
+	ls dadi-vcf-chr/*.vcf.gz | sort -V > data/dadi_vcf_list.txt
+	bcftools concat -Oz -o dadi-vcf/${dataset}.NOR.CEN.22.merged.vcf.gz -f data/${dataset}_vcf_list.txt
+	bcftools index dadi-vcf/${dataset}.NOR.CEN.22.merged.vcf.gz
 fi
 

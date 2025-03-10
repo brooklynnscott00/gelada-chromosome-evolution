@@ -5,7 +5,7 @@
 ##### Step 1 Prepare input VCF
 
 `sbatch --array=1-22 01_dadi-make-vcf.sh`
-- come back and fix the last part, make a file that lists the file path for everything except then uses that for info for bcftools concat so it knows which files to use -
+
 
 - then in the nect script, remove X chromosme, filter for regions
 
