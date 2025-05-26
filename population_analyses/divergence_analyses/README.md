@@ -2,19 +2,47 @@
 
 ### Dadi analysis pipeline
 
-##### Step 1 Prepare input VCF
-
-`sbatch --array=1-22 01_dadi-make-vcf.sh` make a vcf with subset of animals that will be included in the dadi analysis
-`sbatch 02_dadi-filter-vcf-autosomes.sh` filter vcf to remove X chromsome
-`sbatch 03_dadi-filter-vcf-subtract_repeats.sh` 
-`sbatch 04_dadi-filter-vcf-subtract_exons_10k_extended` 
-
 ##### Step 2 Get # of callable sites
 
-`sbatch 05_dadi-combine-gvcfs.sh` Combine gvcfs from the cohort of animals that are used in dadi-cli analyses
-`sbatch 06_dadi-gatk-call-all-sites.sh`
-`sbatch 07_dadi-filter-allsitesVCF-autosomes.sh`
+`sbatch population_analyses/divergence_analyses/05_dadi-combine-gvcfs-1.sh`	jobID: 25388416	**DONE**
+`sbatch population_analyses/divergence_analyses/05_dadi-combine-gvcfs-2.sh`	jobID: 25388441	**DONE**
+Combine gvcfs from the cohort of animals that are used in dadi-cli analyses
+
+`sbatch population_analyses/divergence_analyses/bedtools-make-low-quality-mask.sh`	jobID: 25497062	**DONE**
+Make a low quality mask
+
+(CONVERT THE VCF TO A BED FILE)
+```shell
+sbatch --time=4:00:00 --error=/scratch/brscott4/gelada-chromosome-evolution/out/slurm-%j.err --output=/scratch/brscott4/gelada-chromosome-evolution/out/slurm-%j.out --wrap="zcat dadi-cohort.NOR.CEN.g.vcf.gz | tail -n +15412 | awk '{FS=\"\t\";OFS=\"\t\"; print \$1, \$2-1, \$2}' > dadi-cohort.NOR.CEN.g.bed"
+
+sbatch --time=4:00:00 --error=/scratch/brscott4/gelada-chromosome-evolution/out/slurm-%j.err --output=/scratch/brscott4/gelada-chromosome-evolution/out/slurm-%j.out --wrap="zcat dadi-cohort.CEN.SOU.g.vcf.gz | tail -n +15412 | awk '{FS=\"\t\";OFS=\"\t\"; print \$1, \$2-1, \$2}' > dadi-cohort.CEN.SOU.g.bed"
+```
+jobID: 25478445	**DONE**	
+jobID: 25478453	**DONE**
+
+(MERGE THE BED FILE)
+`sbatch population_analyses/divergence_analyses/bedtools-merge-allsites.sh`	jobID: 25496926	**DONE**
+
+`sbatch population_analyses/divergence_analyses/bedtools-make-neutral-regions-bed.sh`	jobID: 25499112	**DONE**
+remove the low quality/repeats/exons 10k extended
+
+```shell
+l
+```
+number of callable sites in the neutral genome = this number doesn't match up with what I was using which is a little concering. 
+Trying another methods before I do anythingelse 
+
+
+(I THINK WE CAN DELETE ALL OF THE OTHER FILES BUT WAIT TO SEE )
+
+`sbatch population_analyses/divergence_analyses/06_dadi-gatk-call-all-sites-1.sh`
+`sbatch population_analyses/divergence_analyses/06_dadi-gatk-call-all-sites-2.sh`
+
+`sbatch population_analyses/divergence_analyses/07_dadi-filter-allsitesVCF-autosomes-1.sh`
+`sbatch population_analyses/divergence_analyses/07_dadi-filter-allsitesVCF-autosomes-2.sh`
+
 `sbatch 08_dadi-filter-allsitesVCF-subtract_repeats.sh`
+
 `sbatch 09_dadi-filter-allistesVCF-subtract_exons_10k_extended.sh`
 
 ```shell
@@ -25,17 +53,19 @@ wc -l gvcf-dadi-combined/dadi.allsites.nogeno.autosomes.rm_repeats.rm_exons_10k_
 
 ``` 
 
-##### Step 3 Prepare SFS
-`sbatch 10_call-dadi-fs.sh` run dadi to GenerateFs in dadi format
 
-##### Step 4 Run dadi-cli two population models 
-```shell
-sbatch 11_call-dadi-IM.sh
-sbatch 12_call-dadi-no_mig.sh
-sbatch 13_call-dadi-no-mig-size.sh
-sbatch 14_call-dadi-sym-mig.sh
-```
-run dadi-cli to test 4 different two population models
+
+
+
+##### Step 3 Prepare SFS
+`sbatch population_analyses/divergence_analyses/10_call-dadi-fs-2.sh`	jobID: 25541989	**DONE**
+run dadi to GenerateFs in dadi format
+
+`sbatch population_analyses/divergence_analyses/10_call-dadi-fs-2.sh`	jobID: 25613448	**failed**
+`sbatch population_analyses/divergence_analyses/10_call-dadi-fs-2.sh`	jobID: 25614264	**DONE**
+- again but this is the low pass version
+
+
 
 ##### Step 5 Bootstrapping
 sbatch scripts/run-dadi-bootstrapping.sh

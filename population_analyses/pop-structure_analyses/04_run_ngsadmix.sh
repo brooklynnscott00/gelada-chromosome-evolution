@@ -1,14 +1,13 @@
 #!/bin/sh
 #SBATCH --mail-type=ALL
 #SBATCH --mail-type=END
-#SBATCH --mail-user=klchiou@asu.edu
+#SBATCH --mail-user=brscott4@asu.edu
 #SBATCH --job-name="ngsadmix"
 #SBATCH --output=out/slurm-%A_%a.out
 #SBATCH --error=out/slurm-%A_%a.err
 #SBATCH --partition=general
 #SBATCH --qos=public
 #SBATCH --time=4:00:00
-#SBATCH --mem=0
 
 # load modules
 module load mamba/latest
@@ -17,9 +16,9 @@ source activate /data/CEM/smacklab/libraries/python/.conda/envs/angsd
 
 K=${SLURM_ARRAY_TASK_ID}
 
-mkdir -p stats/ngsadmix
+mkdir -p stats/ngsadmix-glo
 
-NGSadmix -likes angsd_final/angsd_genolike_autosomes.beagle.gz -K ${K} -o stats/ngsadmix/gelada_admix_prop.K${K} -minMaf 0.05 -P $SLURM_CPUS_ON_NODE
+NGSadmix -likes angsd_thinned-glo/angsd-glo_genolike_autosomes.beagle.gz -K ${K} -o stats/ngsadmix-glo/gelada_admix_prop.K${K} -minMaf 0.05 -P 14
 
 # # Per chromosome
 # mkdir -p angsd_chr;

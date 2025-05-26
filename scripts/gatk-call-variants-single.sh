@@ -23,7 +23,7 @@ tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
 java -jar ~/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar HaplotypeCaller \
 	--reference /scratch/brscott4/gelada/data/genome/${genome_path} \
 	--output ${tmp_dir}/${i}.${genome}.region.${int}.chr${chr}.raw.g.vcf.gz \
-	--input /data/CEM/smacklab/gelada_project/bam-sorted/tgel1/${i}.aligned-${genome}.sorted.mkdups.bam \
+	--input /data/CEM/smacklab/gelada_project/bam-sorted/tgel1/${i}.${genome}.sorted.mkdups.bam \
 	--intervals $j --emit-ref-confidence GVCF
 
 if [ $(bgzip -t ${tmp_dir}/${i}.${genome}.region.${int}.chr${chr}.raw.g.vcf.gz && echo 0 || echo 1) -eq 0 ]; then

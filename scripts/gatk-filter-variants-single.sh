@@ -11,8 +11,8 @@ if [ ! -f vcf-split/${dataset}.${genome}.bootstrap.region.${int}.chr${chr}.flt.v
 
 tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
 
-gatk --java-options "-Xmx4g" VariantFiltration \
-	--reference genome/${genome_path} \
+java -jar ~/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar VariantFiltration \
+	--reference /scratch/brscott4/gelada/data/genome/${genome_path} \
 	--output  ${tmp_dir}/${dataset}.${genome}.bootstrap.region.${int}.chr${chr}.flt.vcf.gz \
 	--variant  vcf-split/${dataset}.${genome}.bootstrap.region.${int}.chr${chr}.raw.vcf.gz \
 	--filter-name "QD" \

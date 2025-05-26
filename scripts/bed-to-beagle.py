@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import pandas as pd
-import sys
-import re
-import csv
+import sys # command line arguments
+import re # regular expressions 
+import csv # for exporting bed file
 
 # stores command line arguments 
 arguments = sys.argv
@@ -18,7 +18,7 @@ beagle_bed = pd.read_table(in_beagle_bed,sep='\t',header=None,index_col=None,dty
 beagle_keep = (beagle_bed[0] + '_' + beagle_bed[2]).to_list()
 
 # read the beagle file and store the first column ad the index
-beagle = pd.read_table(in_beagle,sep='\t',header=0,index_col=0)
+beagle = pd.read_table(in_beagle,sep='\t',header=None,index_col=0)
 
 # save only the columns that are in the beagle keep file 
 beagle_out = beagle.loc[beagle_keep].copy()
