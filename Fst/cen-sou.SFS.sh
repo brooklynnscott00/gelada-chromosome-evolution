@@ -16,5 +16,5 @@ source scripts/_include_options.sh
 
 mkdir -p angsd-sfs/
 
-realSFS angsd-saf/angsd-central.saf.idx angsd-saf/angsd-southern.saf.idx -P 24 > angsd-sfs/central.southern.ml
+angsd realSFS angsd-saf/angsd-central.saf.idx angsd-saf/angsd-southern.saf.idx -P 24 >angsd-sfs/central.southern.ml
 

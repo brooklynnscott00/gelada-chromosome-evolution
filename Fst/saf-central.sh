@@ -21,4 +21,5 @@ angsd \
 	-anc /scratch/brscott4/gelada/data/genome/${genome_path} \
 	-out angsd-saf/angsd-central \
 	-dosaf 1 \
-	-gl 1
+	-gl 1 \
+	-nInd 18
