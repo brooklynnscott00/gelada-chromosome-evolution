@@ -16,11 +16,7 @@ Call variants
 `sbatch --array=1-2 DI-VCF-preprocessing/quality-filter-variants.sh`	jobID: 26450031	**failed**
 `sbatch --array=1-2 DI-VCF-preprocessing/quality-filter-variants.sh`	jobID: 26450037	**failed**
 `sbatch --array=1-2 DI-VCF-preprocessing/quality-filter-variants.sh`	jobID: 26450046	**failed**
-`sbatch --array=1-2 DI-VCF-preprocessing/quality-filter-variants.sh`	jobID: 26450064
-`sbatch --array=1-2 DI-VCF-preprocessing/quality-filter-variants.sh`
-
-
-
+`sbatch --array=1-2 DI-VCF-preprocessing/quality-filter-variants.sh`	jobID: 26450064	**DONE**
 
 `filter for autosomes`
 `remove repetitive regions`
