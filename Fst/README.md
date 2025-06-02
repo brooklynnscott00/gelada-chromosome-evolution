@@ -1,14 +1,16 @@
 
 # Calculate saf
 
-`sbatch --partition=general --mem=364G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 27631608
+`sbatch --partition=general --mem=364G --time=7-00:00:00 Fst/saf-north.sh`	jobID: s
 
-`sbatch --partition=general --mem=64G --time=7-00:00:00 Fst/saf-central.sh`	jobID: 27631613
+`sbatch --partition=general --mem=64G --time=7-00:00:00 Fst/saf-central.sh`	jobID: 27631613	**DONE**
 
-`sbatch --partition=general --mem=64G --time=7-00:00:00 Fst/saf-southern.sh`	jobID: 27631620
+`sbatch --partition=general --mem=64G --time=7-00:00:00 Fst/saf-southern.sh`	jobID: 27631620	**DONE**
 
 
-`sbatch Fst/cen-sou.SFS.sh`	jobID: 
+`sbatch Fst/cen-sou.SFS.sh`	jobID: 27817241	**failed**
+`sbatch Fst/cen-sou.SFS.sh`	jobID: 27817321	**OOM**
+`sbatch Fst/cen-sou.SFS.sh`	jobID: 27817333
 
 `sbatch Fst/nor-cen.SFS.sh`	jobID: 
 

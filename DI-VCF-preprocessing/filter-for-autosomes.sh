@@ -25,9 +25,9 @@ NC_037688.1
 mkdir -p vcf
 
 if [ "$SLURM_ARRAY_TASK_ID" -eq 1 ]; then
-	bcftools view --regions ${regions} -O z -o cen-sou.quality-filtered.autosomes_only.vcf.gz cen-sou.quality-filtered.vcf.gz
-	bcftools view --regions ${regions} -O z -o cen-sou.cohort.autosomes_only.g.vcf cen-sou.cohort.g.vcf
+	bcftools view --regions ${regions} -O z -o vcf/cen-sou.quality-filtered.autosomes_only.vcf.gz vcf/cen-sou.quality-filtered.vcf.gz
+	bcftools view --regions ${regions} -O z -o gvcf/cen-sou.cohort.autosomes_only.g.vcf gvcf/cen-sou.cohort.g.vcf
 else
-	bcftools view --regions ${regions} -O z -o nor-cen.quality-filtered.autosomes_only.vcf.gz nor-cen.quality-filtered.vcf.gz
-	bcftools view --regions ${regions} -O z -o nor-cen.cohort.autosomes_only.g.vcf nor-cen.cohort.g.vcf
+	bcftools view --regions ${regions} -O z -o vcf/nor-cen.quality-filtered.autosomes_only.vcf.gz vcf/nor-cen.quality-filtered.vcf.gz
+	bcftools view --regions ${regions} -O z -o gvcf/nor-cen.cohort.autosomes_only.g.vcf gvcf/nor-cen.cohort.g.vcf
 fi

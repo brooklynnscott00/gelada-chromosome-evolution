@@ -8,13 +8,13 @@
 #SBATCH --partition=htc
 #SBATCH --qos=public
 #SBATCH --time=4:00:00
-#SBATCH --mem=24G
+#SBATCH --mem=150G
 #SBATCH --cpus-per-task=4
 
-export PATH=$PATH:~/programs/angsd/
+export PATH=$PATH:~/programs/angsd/misc/
 source scripts/_include_options.sh
 
 mkdir -p angsd-sfs/
 
-angsd realSFS angsd-saf/angsd-central.saf.idx angsd-saf/angsd-southern.saf.idx -P 24 >angsd-sfs/central.southern.ml
+realSFS angsd-saf/angsd-central.saf.idx angsd-saf/angsd-southern.saf.idx -P 24 >angsd-sfs/central.southern.ml
 
