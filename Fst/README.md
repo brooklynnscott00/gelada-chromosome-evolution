@@ -10,7 +10,8 @@
 
 `sbatch Fst/cen-sou.SFS.sh`	jobID: 27817241	**failed**
 `sbatch Fst/cen-sou.SFS.sh`	jobID: 27817321	**OOM**
-`sbatch Fst/cen-sou.SFS.sh`	jobID: 27817333
+`sbatch Fst/cen-sou.SFS.sh`	jobID: 27817333	**OOM**
+`sbatch --mem=400G Fst/cen-sou.SFS.sh`	jobID: 27817660
 
 `sbatch Fst/nor-cen.SFS.sh`	jobID: 
 
