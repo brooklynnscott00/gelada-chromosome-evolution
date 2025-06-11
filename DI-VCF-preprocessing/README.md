@@ -73,11 +73,12 @@ Want to try to re-do those step below
 `sbatch DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27993944	**OOM**
 `sbatch --mem=128G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27994669	**OOM**	
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27994950	**failed**
-`sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27995632
+`sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27995632	**failed**
+`sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28001396	**DONE**
 
-`sbatch DI-VCF-preprocessing/vcf2bed.sh`	jobID: 27994705
+`sbatch DI-VCF-preprocessing/vcf2bed.sh`	jobID: 27994705	**DONE**
 
-`sbatch DI-VCF-prepocessing/bedtools-merge-allsites.sh`
+`sbatch DI-VCF-preprocessing/bedtools-merge-allsites.sh`	jobID: 28001417	**DONE**
 
 
 NETURAL REGIONS BED
@@ -88,8 +89,6 @@ bedtools subtract -a data/gvcf-dadi-combined/final.allsites.nogeno.filtered.agai
   | bedtools subtract -a stdin -b /scratch/klchiou/brooklynn/genomes/Theropithecus_gelada.Tgel_1.0.dna_rm_reindexed_refseq.bed \
   | bedtools subtract -a stdin -b /scratch/klchiou/brooklynn/genomes/Theropithecus_gelada.Tgel_1.0.110_reindexed_refseq_exons_10k_extended.gtf.gz > \
   data/gvcf-dadi-combined/final.allsites.nogeno.filtered.pass.biallelic.rm_repeats.rm_exons_10k_extended.bed
-
-
 
 
 

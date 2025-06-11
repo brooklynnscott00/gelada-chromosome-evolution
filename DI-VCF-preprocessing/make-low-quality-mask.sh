@@ -12,6 +12,8 @@
 
 module load bedtools2-2.30.0-gcc-11.2.0
 module load bcftools-1.14-gcc-11.2.0
+module load htslib-1.21-gcc-11.2.0
+
 source scripts/_include_options.sh
 mkdir -p vcf
 
@@ -29,8 +31,9 @@ bedtools subtract -header \
 	-b vcf/cen-sou.quality-filtered.vcf.gz > \
 	vcf/cen-sou.low_quality_mask.vcf
 
-gzip vcf/cen-sou.low_quality_mask.vcf
+bgzip vcf/cen-sou.low_quality_mask.vcf
 
+bcftools index vcf/cen-sou.low_quality_mask.vcf.gz
 bcftools view --regions ${regions} -Oz -o vcf/cen-sou.autosomes.low_quality_mask.vcf.gz vcf/cen-sou.low_quality_mask.vcf.gz
 
 bedtools subtract -header \
@@ -38,6 +41,7 @@ bedtools subtract -header \
 	-b vcf/nor-cen.quality-filtered.vcf.gz > \
 	vcf/nor-cen.low_quality_mask.vcf
 
-gzip vcf/nor-cen.low_quality_mask.vcf
+bgzip vcf/nor-cen.low_quality_mask.vcf
 
+bcftools index vcf/nor-cen.low_quality_mask.vcf.gz
 bcftools view --regions ${regions} -Oz -o vcf/nor-cen.autosomes.low_quality_mask.vcf.gz vcf/nor-cen.low_quality_mask.vcf.gz
