@@ -75,52 +75,24 @@ Want to try to re-do those step below
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27994950	**failed**
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27995632	**failed**
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28001396	**DONE**
+`sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28053502
+
+
+
 
 `sbatch DI-VCF-preprocessing/vcf2bed.sh`	jobID: 27994705	**DONE**
 
 `sbatch DI-VCF-preprocessing/bedtools-merge-allsites.sh`	jobID: 28001417	**DONE**
 
+`sbatch DI-VCF-preprocessing/make-neutral-regions-bed.sh`	jobID: 28016580	**failed**
+`sbatch DI-VCF-preprocessing/make-neutral-regions-bed.sh`	jobID: 28016619	**DONE**
 
-NETURAL REGIONS BED
+```shell
+awk '{sum+=$3;sum1+=$2;} END{print sum-sum1;}' gvcf/cen-sou.cohort.autosomes_only.merged.pass.rm_repeats.rm_exons_10k_extended.g.bed
+```
+Number of callable sites = 577244838
 
-bed file - mask - repetitive regions - exons 10k extened = neutral regions bed file for the number of callable sites 
-
-bedtools subtract -a data/gvcf-dadi-combined/final.allsites.nogeno.filtered.again.merge.bed -b data/gvcf-dadi-combined/low_quality_mask.vcf.gz \
-  | bedtools subtract -a stdin -b /scratch/klchiou/brooklynn/genomes/Theropithecus_gelada.Tgel_1.0.dna_rm_reindexed_refseq.bed \
-  | bedtools subtract -a stdin -b /scratch/klchiou/brooklynn/genomes/Theropithecus_gelada.Tgel_1.0.110_reindexed_refseq_exons_10k_extended.gtf.gz > \
-  data/gvcf-dadi-combined/final.allsites.nogeno.filtered.pass.biallelic.rm_repeats.rm_exons_10k_extended.bed
-
-
-
-
-
-'''sbatch scripts/bedtools-merge-allsites.sh'''     jobID: 12599409     **DONE**
-merge the bed file in to regions 
-
-'''sbatch scripts/bedtools-make-neutral-regions-bed.sh''' jobID: 12628445   **DONE**
-remove the low quality/repeats/exons 10k extended
-
-'''awk '{sum+=$3;sum1+=$2;} END{print sum-sum1;}' final.allsites.nogeno.filtered.pass.biallelic.rm_repeats.rm_exons_10k_extended.bed'''
-number of callable sites in the neutral genome = 610270154
-
-
-
-[brscott4@sc003:/scratch/brscott4/gelada/scripts]$ cat bedtools-make-inaccessible-mask.sh
-#!/bin/sh
-#SBATCH --mail-type=ALL
-#SBATCH --mail-type=END
-#SBATCH --mail-user=brscott4@asu.edu
-#SBATCH --job-name="inaccessible mask"
-#SBATCH --output=out/slurm-%j.out
-#SBATCH --error=out/slurm-%j.err
-#SBATCH --partition=htc
-#SBATCH --qos=public
-#SBATCH --time=4:00:00
-#SBATCH --mem=32G
-
-module load bedtools2-2.30.0-gcc-11.2.0
-
-bedtools subtract \
-	-a /scratch/brscott4/gelada/data/gvcf-dadi-combined/final.vcf.gz \
-	-b /scratch/brscott4/gelada/data/gvcf-dadi-combined/final.quality_filtered.pass.biallelic.rm_repeats.rm_exons_10k_extended.vcf.gz > \
-	/scratch/brscott4/gelada/data/gvcf-dadi-combined/inaccessible-mask.vcf
+```shell
+awk '{sum+=$3;sum1+=$2;} END{print sum-sum1;}' gvcf/nor-cen.cohort.autosomes_only.merged.pass.rm_repeats.rm_exons_10k_extended.g.bed
+```
+Number of callable sites = 

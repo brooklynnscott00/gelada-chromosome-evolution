@@ -26,22 +26,16 @@ NC_037684.1,NC_037685.1,NC_037686.1,NC_037687.1,\
 NC_037688.1
 "
 
-bedtools subtract -header \
-	-a vcf/cen-sou.vcf.gz \
-	-b vcf/cen-sou.quality-filtered.vcf.gz > \
-	vcf/cen-sou.low_quality_mask.vcf
+# central and southern
+bcftools view --regions ${regions} -Oz -o vcf/cen-sou.quality-filtered.autosomes.vcf.gz vcf/cen-sou.quality-filtered.vcf.gz
+bcftools index vcf/cen-sou.quality-filtered.autosomes.vcf.gz
 
-bgzip vcf/cen-sou.low_quality_mask.vcf
+bcftools view -f '.,FAIL' vcf/cen-sou.quality-filtered.autosomes.vcf.gz | \
+bcftools query -f '%CHROM\t%POS0\t%POS\n' > vcf/cen-sou.low_quality_mask.bed
 
-bcftools index vcf/cen-sou.low_quality_mask.vcf.gz
-bcftools view --regions ${regions} -Oz -o vcf/cen-sou.autosomes.low_quality_mask.vcf.gz vcf/cen-sou.low_quality_mask.vcf.gz
+# northern and central 
+bcftools view --regions ${regions} -Oz -o vcf/nor-cen.quality-filtered.autosomes.vcf.gz vcf/nor-cen.quality-filtered.vcf.gz
+bcftools index vcf/nor-cen.quality-filtered.autosomes.vcf.gz
 
-bedtools subtract -header \
-	-a vcf/nor-cen.vcf.gz \
-	-b vcf/nor-cen.quality-filtered.vcf.gz > \
-	vcf/nor-cen.low_quality_mask.vcf
-
-bgzip vcf/nor-cen.low_quality_mask.vcf
-
-bcftools index vcf/nor-cen.low_quality_mask.vcf.gz
-bcftools view --regions ${regions} -Oz -o vcf/nor-cen.autosomes.low_quality_mask.vcf.gz vcf/nor-cen.low_quality_mask.vcf.gz
+bcftools view -f '.,FAIL' vcf/nor-cen.quality-filtered.autosomes.vcf.gz | \
+bcftools query -f '%CHROM\t%POS0\t%POS\n' > vcf/nor-cen.low_quality_mask.bed
