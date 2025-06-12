@@ -16,3 +16,12 @@
 /data/CEM/smacklab/gelada_project/bam-sorted/tgel1/GUA001.tgel1.sorted.mkdups.bam
 /data/CEM/smacklab/gelada_project/bam-sorted/tgel1/GUA002.tgel1.sorted.mkdups.bam
 /data/CEM/smacklab/gelada_project/bam-sorted/tgel1/GUA003.tgel1.sorted.mkdups.bam
+/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/306113.aligned-tgel1.sorted.mkdups.bam
+/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/306114.aligned-tgel1.sorted.mkdups.bam
+/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/306115.aligned-tgel1.sorted.mkdups.bam
+/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/306116.aligned-tgel1.sorted.mkdups.bam
+/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/306117.aligned-tgel1.sorted.mkdups.bam
+/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/306118.aligned-tgel1.sorted.mkdups.bam
+/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/306119.aligned-tgel1.sorted.mkdups.bam
+/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/306120.aligned-tgel1.sorted.mkdups.bam
+/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/306121.aligned-tgel1.sorted.mkdups.bam

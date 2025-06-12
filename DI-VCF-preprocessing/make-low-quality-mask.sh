@@ -7,7 +7,7 @@
 #SBATCH --error=out/slurm-%j.err
 #SBATCH --partition=htc
 #SBATCH --qos=public
-#SBATCH --time=1:00:00
+#SBATCH --time=4:00:00
 #SBATCH --mem=24G
 
 module load bedtools2-2.30.0-gcc-11.2.0
@@ -27,15 +27,13 @@ NC_037688.1
 "
 
 # central and southern
-bcftools view --regions ${regions} -Oz -o vcf/cen-sou.quality-filtered.autosomes.vcf.gz vcf/cen-sou.quality-filtered.vcf.gz
-bcftools index vcf/cen-sou.quality-filtered.autosomes.vcf.gz
+bcftools index vcf/cen-sou.quality-filtered.autosomes_only.vcf.gz
 
-bcftools view -f '.,FAIL' vcf/cen-sou.quality-filtered.autosomes.vcf.gz | \
+bcftools view -f '.,FAIL' vcf/cen-sou.quality-filtered.autosomes_only.vcf.gz | \
 bcftools query -f '%CHROM\t%POS0\t%POS\n' > vcf/cen-sou.low_quality_mask.bed
 
 # northern and central 
-bcftools view --regions ${regions} -Oz -o vcf/nor-cen.quality-filtered.autosomes.vcf.gz vcf/nor-cen.quality-filtered.vcf.gz
-bcftools index vcf/nor-cen.quality-filtered.autosomes.vcf.gz
+bcftools index vcf/nor-cen.quality-filtered.autosomes_only.vcf.gz
 
-bcftools view -f '.,FAIL' vcf/nor-cen.quality-filtered.autosomes.vcf.gz | \
+bcftools view -f '.,FAIL' vcf/nor-cen.quality-filtered.autosomes_only.vcf.gz | \
 bcftools query -f '%CHROM\t%POS0\t%POS\n' > vcf/nor-cen.low_quality_mask.bed

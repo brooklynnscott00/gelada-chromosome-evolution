@@ -75,8 +75,8 @@ Want to try to re-do those step below
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27994950	**failed**
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27995632	**failed**
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28001396	**DONE**
-`sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28053502
-
+`sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28053502	**timeout**
+`sbatch --time=4:00:00 --mem=100G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28059818
 
 
 

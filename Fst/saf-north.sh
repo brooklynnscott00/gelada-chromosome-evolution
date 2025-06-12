@@ -9,17 +9,25 @@
 #SBATCH --qos=public
 #SBATCH --time=4:00:00
 #SBATCH --mem=24G
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=12
 
 export PATH=$PATH:~/programs/angsd/
 source scripts/_include_options.sh
 
-mkdir -p angsd-saf/
+# assign chromosome number to slurm array ask ID
+chromosomes="
+NC_037668.1,NC_037669.1,NC_037670.1,NC_037671.1,\
+NC_037672.1,NC_037673.1,NC_037674.1,NC_037675.1,\
+NC_037676.1,NC_037677.1,NC_037678.1,NC_037679.1,\
+NC_037680.1,NC_037681.1,NC_037682.1,NC_037683.1,\
+NC_037684.1,NC_037685.1,NC_037686.1,NC_037687.1,\
+NC_037688.1,NC_037689.1
+"
+chromosome=$(echo "$chromosomes" | cut -d',' -f${SLURM_ARRAY_TASK_ID})
 
-angsd \
-	-b data/bam-lists/northern.txt \
-	-anc /scratch/brscott4/gelada/data/genome/${genome_path} \
-	-out angsd-saf/angsd-northern \
-	-dosaf 1 \
-	-gl 1 \
-	-nInd 106
+# extract correspinding sample ID 
+population="northern central southern"
+
+slots=12
+
+parallel -j $slots scripts/gatk-call-variants-single.sh {1} {2} ::: $population ::: $chromosome

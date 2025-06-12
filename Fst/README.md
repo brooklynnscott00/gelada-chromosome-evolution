@@ -1,5 +1,12 @@
-
 # Calculate saf
+
+This should hopefully run everything in parallel
+`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28059740
+
+`sbatch --array=2-22 --partition=general --mem=364G --time=7-00:00:00 Fst/saf-north.sh`
+
+
+
 
 `sbatch --partition=general --mem=364G --time=7-00:00:00 Fst/saf-north.sh`	jobID: s
 
