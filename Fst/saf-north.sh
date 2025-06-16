@@ -3,8 +3,8 @@
 #SBATCH --mail-type=END
 #SBATCH --mail-user=brscott4@asu.edu
 #SBATCH --job-name="Fst north"
-#SBATCH --output=out/slurm-%j.out
-#SBATCH --error=out/slurm-%j.err
+#SBATCH --output=out/slurm-%A_%a.out
+#SBATCH --error=out/slurm-%A_%a.err
 #SBATCH --partition=htc
 #SBATCH --qos=public
 #SBATCH --time=4:00:00
@@ -12,6 +12,7 @@
 #SBATCH --cpus-per-task=12
 
 export PATH=$PATH:~/programs/angsd/
+module load htslib-1.21-gcc-11.2.0
 source scripts/_include_options.sh
 
 # assign chromosome number to slurm array ask ID
@@ -30,4 +31,5 @@ population="northern central southern"
 
 slots=12
 
-parallel -j $slots scripts/gatk-call-variants-single.sh {1} {2} ::: $population ::: $chromosome
+parallel -j $slots scripts/angsd-saf-single.sh {1} {2} ::: $population ::: $chromosome
+

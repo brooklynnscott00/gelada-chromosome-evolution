@@ -3,8 +3,8 @@
 #SBATCH --mail-type=END
 #SBATCH --mail-user=brscott4@asu.edu
 #SBATCH --job-name="SFS north and central"
-#SBATCH --output=out/slurm-%j.out
-#SBATCH --error=out/slurm-%j.err
+#SBATCH --output=out/slurm-%A_%a.out
+#SBATCH --error=out/slurm-%A_%a.err
 #SBATCH --partition=htc
 #SBATCH --qos=public
 #SBATCH --time=4:00:00

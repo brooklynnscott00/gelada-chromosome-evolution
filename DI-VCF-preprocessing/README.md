@@ -1,7 +1,6 @@
 # Make VCFs for demogrpahic inference analyses
 
 
-
 BEFORE THIS WHOLE THING FINISHES I SHOULD CHANGE THE DIRCTORY NAME FROM `vcf` TO SOMETHING LIKE `DI-vcf`
 mayu same for the gvcf directory so I don't get it confused with the long term gvcf storage in /CEM/smacklab/
 
@@ -76,23 +75,36 @@ Want to try to re-do those step below
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 27995632	**failed**
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28001396	**DONE**
 `sbatch --mem=400G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28053502	**timeout**
-`sbatch --time=4:00:00 --mem=100G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28059818
+`sbatch --time=4:00:00 --mem=100G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28059818	**failed**
+`sbatch --time=4:00:00 --mem=100G DI-VCF-preprocessing/make-low-quality-mask.sh`	jobID: 28165485	**DONE**
 
+Check the output files before moving on:
+```shell
+awk '{sum+=$3;sum1+=$2;} END{print sum-sum1;}' vcf/cen-sou.low_quality_mask.bed
+```
+46342647 sites
 
+```shell
+awk '{sum+=$3;sum1+=$2;} END{print sum-sum1;}' vcf/nor-cen.low_quality_mask.bed
+```
+1256515 sites
 
 `sbatch DI-VCF-preprocessing/vcf2bed.sh`	jobID: 27994705	**DONE**
 
 `sbatch DI-VCF-preprocessing/bedtools-merge-allsites.sh`	jobID: 28001417	**DONE**
 
 `sbatch DI-VCF-preprocessing/make-neutral-regions-bed.sh`	jobID: 28016580	**failed**
-`sbatch DI-VCF-preprocessing/make-neutral-regions-bed.sh`	jobID: 28016619	**DONE**
+`sbatch DI-VCF-preprocessing/make-neutral-regions-bed.sh`	jobID: 28016619	**failed**
+`sbatch DI-VCF-preprocessing/make-neutral-regions-bed.sh`	jobID: 28165664	**DONE**
+
 
 ```shell
 awk '{sum+=$3;sum1+=$2;} END{print sum-sum1;}' gvcf/cen-sou.cohort.autosomes_only.merged.pass.rm_repeats.rm_exons_10k_extended.g.bed
 ```
-Number of callable sites = 577244838
+Number of callable sites = 564856677
 
 ```shell
 awk '{sum+=$3;sum1+=$2;} END{print sum-sum1;}' gvcf/nor-cen.cohort.autosomes_only.merged.pass.rm_repeats.rm_exons_10k_extended.g.bed
 ```
-Number of callable sites = 
+Number of callable sites = 577083394
+
