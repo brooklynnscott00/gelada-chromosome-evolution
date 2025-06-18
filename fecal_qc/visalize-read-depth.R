@@ -13,19 +13,34 @@ sample_list = c(
   "LID_1074789"
 )
 
-for (i in 1:length(bam_list)){
-  depth <- read_tsv(paste0(basedir, "/samtools-depth/", i, ".aligned-tgel1.sorted.mkdups.depth.gz"), col_names = F)$X1
+for (i in seq_along(sample_list)) {
+  sample_name <- sample_list[i]
+  
+  # Construct the path using the sample name
+  depth_file <- paste0(basedir, "/samtools-depth/", sample_name, ".aligned-tgel1.sorted.mkdups.depth.gz")
+  
+  # Read depth data
+  depth <- read_tsv(depth_file, col_names = FALSE)$X1
+  
   mean_depth <- mean(depth)
   sd_depth <- sd(depth)
   mean_depth_nonzero <- mean(depth[depth > 0])
   mean_depth_within2sd <- mean(depth[depth < mean_depth + 2 * sd_depth])
-  median <- median(depth)
+  median_depth <- median(depth)
   presence <- as.logical(depth)
   proportion_of_reference_covered <- mean(presence)
-  output_temp <- tibble(i, mean_depth, sd_depth, mean_depth_nonzero, mean_depth_within2sd, median, proportion_of_reference_covered)
   
-  # Bind stats into dataframe and store sample-specific per base depth and presence data
-  if (i==1){
+  output_temp <- tibble(
+    sample = sample_name,
+    mean_depth,
+    sd_depth,
+    mean_depth_nonzero,
+    mean_depth_within2sd,
+    median_depth,
+    proportion_of_reference_covered
+  )
+  
+  if (i == 1) {
     output <- output_temp
     total_depth <- depth
     total_presence <- presence
@@ -36,10 +51,9 @@ for (i in 1:length(bam_list)){
   }
 }
 
+# Round numeric columns for better readability
 output %>%
   mutate(across(where(is.numeric), round, 3))
-
-
 
 
 # Plot the depth distribution (this may take a few minutes to run)

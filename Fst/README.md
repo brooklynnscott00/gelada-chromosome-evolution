@@ -6,9 +6,9 @@ This should hopefully run everything in parallel
 `sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28064253	**failed**
 `sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28165495	**failed**
 `sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28165665	**failed**
-`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28165747
+`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28165747	**DONE**
 
-`sbatch --array=2-22 --partition=general --mem=364G --time=7-00:00:00 Fst/saf-north.sh`
+`sbatch --array=2-22 --partition=general --mem=364G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28181806
 
 
 

@@ -18,10 +18,6 @@ module load mamba/latest
 source scripts/_include_options.sh
 source activate /scratch/nsnyderm/conda_env/dadi-gpu
 
-# assign population to slurm array task ID
-data/central_southern.22.popfile.txt
-
-
 mkdir -p dadi_results
 mkdir -p dadi_results/cen-sou
 mkdir -p dadi_results/nor-cen
@@ -42,3 +38,4 @@ dadi-cli GenerateFs \
     --output dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.lowpass.folded.fs \
     --calc-coverage
 
+h
