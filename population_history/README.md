@@ -20,11 +20,13 @@ no migration
 
 no migration with size change 
 `sbatch population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`	jobID: 28182490	**timeout**
-`sbatch --partition=general --time=7-00:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`	jobID: 28189709
+`sbatch --partition=general --time=7-00:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`	jobID: 28189709	**cancelled**
+`sbatch population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`	jobID: 28470377
 
 symmetrical migration
 `sbatch population_history/dadi_cli/nor-cen.dadi-sym_mig.sh`	jobID: 28182762	**warning**
 `sbatch population_history/dadi_cli/nor-cen.dadi-sym_mig.sh`	jobID: 28189715	**warning**
+`sbatch population_history/dadi_cli/nor-cen.dadi-sym_mig.sh`	jobID: 28470670
 
 ### central/southern analyses
 
@@ -55,6 +57,9 @@ symmetrical migration
 `sbatch --partition=general --time=7-00:00:00 population_history/dadi_cli/cen-sou.dadi-sym_mig.sh`	jobID: 28468964
 
 founder_asym
+`sbatch population_history/dadi_cli/cen-sou.dadi-founder_asym.sh`	jobID: 28470360	**failed**
+`sbatch population_history/dadi_cli/cen-sou.dadi-founder_asym.sh`	jobID: 28470706
+
 founder_nomig
 founder_nomig_admix_early
 
@@ -68,4 +73,6 @@ founder_nomig_admix_early
 Data is not masked:
 
 https://groups.google.com/g/dadi-user/c/esRqfOQ7Amc
+
+# smcpp
 

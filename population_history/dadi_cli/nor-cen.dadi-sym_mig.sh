@@ -24,8 +24,8 @@ mkdir -p dadi_results/nor-cen
 dadi-cli InferDM --fs dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.lowpass.folded.fs \
     --model sym_mig \
     --nomisid \
-    --p0 0.19828690306129512 0.1434848538365765 0.6716388358380612 0.13015786537684146 \
-    --lbounds 1e-2 1e-2 1e-3 1e-2 \
+    --p0 0.19902418493349744 0.14402950631028338 0.6602901684752044 0.13020961790746938 \
+    --lbounds 1e-3 1e-3 1e-3 1e-2 \
     --ubounds 10 100 10 100 \
     --output-prefix dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.sym_mig.demo.params \
     --check-convergence 5 \

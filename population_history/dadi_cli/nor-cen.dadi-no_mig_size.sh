@@ -9,7 +9,7 @@
 #SBATCH --qos=public
 #SBATCH --time=4:00:00
 #SBATCH --mem=4G
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=16
 #SBATCH --export=NONE
 
 module load htslib-1.21-gcc-11.2.0
@@ -24,10 +24,9 @@ mkdir -p dadi_results/nor-cen
 dadi-cli InferDM --fs dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.lowpass.folded.fs \
     --model no_mig_size \
     --nomisid \
-    --p0 2.208563852148079e-06 1e-08 0.02435975813406871 3.790102337906753 7.100498422398548e-09 0.011965499108114907 \
-    --lbounds 1e-7 1e-9 1e-4 1e-1 1e-10 1e-3 \
-    --ubounds 1e-4 1e-7 0.99 10 1e-6 0.99 \
+    --p0 1.3806424180040722e-06 1.003394540411702e-08 0.062424504502346545 0.2846462213802358 6.516641410323098e-09 0.02602514468755817 \
+    --lbounds 1e-8 1e-9 1e-4 1e-2 1e-11 1e-3 \
+    --ubounds 1e-4 1e-7 0.99 10 1e-8 0.99 \
     --output-prefix dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.no_mig_size.demo.params \
-	--check-convergence 5 \
-    --force-convergence 500 \
-    --cpus 4
+    --force-convergence 100 \
+    --cpus 16
