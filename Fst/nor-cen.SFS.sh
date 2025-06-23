@@ -9,12 +9,12 @@
 #SBATCH --qos=public
 #SBATCH --time=4:00:00
 #SBATCH --mem=24G
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=24
 
-export PATH=$PATH:~/programs/angsd/
+export PATH=$PATH:~/programs/angsd/misc/
 source scripts/_include_options.sh
 
 mkdir -p angsd-sfs/
 
-angsd realSFS angsd-saf/angsd-northern.saf.idx angsd-saf/angsd-central.saf.idx -P 24 > angsd-sfs/northern.central.ml
+realSFS angsd-saf/angsd-northern.saf.idx angsd-saf/angsd-central.saf.idx -fold 1 -P 24 > angsd-sfs/northern.central.ml
 

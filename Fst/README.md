@@ -1,34 +1,15 @@
 # Calculate saf
 
-This should hopefully run everything in parallel
-`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28059740	**failed**
-`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28060239	**failed**
-`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28064253	**failed**
-`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28165495	**failed**
-`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28165665	**failed**
-`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28165747	**DONE**
-
-`sbatch --array=2-22 --partition=general --mem=364G --time=7-00:00:00 Fst/saf-north.sh`	jobID: 28181806
+`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/angsd-saf.sh`	jobID: 28165747	**DONE**
+`sbatch --array=2-22 --partition=general --mem=364G --time=7-00:00:00 Fst/angsd-saf.sh`	jobID: 28181806	**DONE**
 
 
+`sbatch --partition=highmem --mem=800G Fst/cen-sou.SFS.sh`	jobID: 28414144	**tiemout**
+`sbatch --partition=highmem  --time=7-00:00:00 --mem=800G Fst/cen-sou.SFS.sh`	jobID: 
 
+`sbatch --partition=highmem --mem=800G Fst/nor-cen.SFS.sh`	jobID: 28414145	**failed**
 
-`sbatch --partition=general --mem=364G --time=7-00:00:00 Fst/saf-north.sh`	jobID: s
-
-`sbatch --partition=general --mem=64G --time=7-00:00:00 Fst/saf-central.sh`	jobID: 27631613	**DONE**
-
-`sbatch --partition=general --mem=64G --time=7-00:00:00 Fst/saf-southern.sh`	jobID: 27631620	**DONE**
-
-
-`sbatch Fst/cen-sou.SFS.sh`	jobID: 27817241	**failed**
-`sbatch Fst/cen-sou.SFS.sh`	jobID: 27817321	**OOM**
-`sbatch Fst/cen-sou.SFS.sh`	jobID: 27817333	**OOM**
-`sbatch --mem=400G Fst/cen-sou.SFS.sh`	jobID: 27817660
-
-`sbatch Fst/nor-cen.SFS.sh`	jobID: 
-
-`sbatch Fst/nor-sou.SFS.sh`	jobID: 
-
+`sbatch --partition=highmem --mem=800G Fst/nor-sou.SFS.sh`	jobID: 28414147	**failed**
 
 
 `sbatch Fst/realSFS-Fst.sh`

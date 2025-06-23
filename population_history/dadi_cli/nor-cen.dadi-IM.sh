@@ -10,6 +10,7 @@
 #SBATCH --time=1:00:00
 #SBATCH --mem=8G
 #SBATCH --cpus-per-task=16
+#SBATCH --export=NONE
 
 module load htslib-1.21-gcc-11.2.0
 module load mamba/latest

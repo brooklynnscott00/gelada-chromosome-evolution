@@ -16,7 +16,5 @@ source activate /data/CEM/smacklab/libraries/python/.conda/envs/angsd
 
 mkdir -p stats/pcangsd-glo
 
-# pcangsd --beagle angsd_final/angsd_genolike_autosomes.beagle.gz --admix -o stats/ngsadmix/gelada --threads $SLURM_CPUS_ON_NODE
-
 pcangsd --beagle angsd_final-glo/angsd-glo_genolike_autosomes.beagle.gz --out stats/pcangsd-glo/gelada_thinned --threads 1
 

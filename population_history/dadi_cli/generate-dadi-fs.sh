@@ -38,4 +38,3 @@ dadi-cli GenerateFs \
     --output dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.lowpass.folded.fs \
     --calc-coverage
 
-h
