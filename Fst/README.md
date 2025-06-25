@@ -3,16 +3,16 @@
 `sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/angsd-saf.sh`	jobID: 28165747	**DONE**
 `sbatch --array=2-22 --partition=general --mem=364G --time=7-00:00:00 Fst/angsd-saf.sh`	jobID: 28181806	**DONE**
 
+`sbatch --array=1 --partition=general --mem=100G --time=7-00:00:00 Fst/joint-sfs-generation.sh`	jobID: 28503408
+`sbatch --dependency=afternotok:28503408_1 --array=1 --partition=general --mem=200G --time=7-00:00:00 Fst/joint-sfs-generation.sh`	jobID: 28529047
 
-`sbatch --partition=highmem --mem=800G Fst/cen-sou.SFS.sh`	jobID: 28414144	**tiemout**
-`sbatch --partition=highmem  --time=7-00:00:00 --mem=800G Fst/cen-sou.SFS.sh`	jobID: 
+`sbatch --array=2-22 --partition=general --mem=100G --time=7-00:00:00 Fst/joint-sfs-generation.sh`	jobID: 28503847	**cancelled**
 
-`sbatch --partition=highmem --mem=800G Fst/nor-cen.SFS.sh`	jobID: 28414145	**failed**
+`sbatch --array=2-5 --partition=general --mem=200G --time=7-00:00:00 Fst/joint-sfs-generation.sh`	jobID: 28529024
+`sbatch --array=6 --partition=general --mem=200G --time=7-00:00:00 Fst/joint-sfs-generation.sh`	jobID: 28529034
+`sbatch --array=8-10,12-16,18,22 --partition=general --mem=100G --time=7-00:00:00 Fst/joint-sfs-generation.sh`	jobID: 28529046
 
-`sbatch --partition=highmem --mem=800G Fst/nor-sou.SFS.sh`	jobID: 28414147	**failed**
 
-
-`sbatch Fst/realSFS-Fst.sh`
 
 # get the global estimate
 	-> Assuming idxname:here.fst.idx

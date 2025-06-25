@@ -23,6 +23,7 @@ mkdir -p dadi_results/cen-sou
 
 # 5 params 
 # s , nu2, T, m12, m21
+# increase optimiza
 
 dadi-cli InferDM --fs dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs \
 	--model founder_asym \
@@ -31,6 +32,7 @@ dadi-cli InferDM --fs dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowp
     --lbounds 1e-3 1e-3 1e-3 1e-3 1e-3 \
     --ubounds 0.99 0.99 0.99 0.99 0.99 \
 	--output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.founder_asym.demo.params \
+	--optimizations 20 \
 	--force-convergence 100 \
 	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
 	--cpus 16

@@ -20,15 +20,15 @@ source activate /scratch/nsnyderm/conda_env/dadi-gpu
 
 mkdir -p dadi_results
 mkdir -p dadi_results/nor-cen
+mkdir -p dadi_results/nor-cen/sym_mig_1
 
 dadi-cli InferDM --fs dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.lowpass.folded.fs \
     --model sym_mig \
     --nomisid \
-    --p0 0.19902418493349744 0.14402950631028338 0.6602901684752044 0.13020961790746938 \
-    --lbounds 1e-3 1e-3 1e-3 1e-2 \
-    --ubounds 10 100 10 100 \
-    --output-prefix dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.sym_mig.demo.params \
-    --check-convergence 5 \
-    --force-convergence 500 \
+    --p0 0.199 0.144 0.66 0.130 \
+    --lbounds 1e-4 1e-4 1e-4 1e-4 \
+    --ubounds 100 100 100 100 \
+    --output-prefix dadi_results/nor-cen/sym_mig_1/${dataset}.nor-cen.autosomes.noncoding.sym_mig.demo.params \
+    --force-convergence 100 \
     --cpus 4
 

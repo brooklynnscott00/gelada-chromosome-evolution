@@ -22,13 +22,13 @@ mkdir -p dadi_results
 mkdir -p dadi_results/cen-sou
 
 dadi-cli InferDM --fs dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-    --p0 0.3692819110903314 4.902925495516077 0.5391757626755409 \
+    --p0 0.369 4.903 0.539 \
     --model no_mig \
     --nomisid \
     --lbounds 1e-3 1e-1 1e-3 \
-    --ubounds 0.99 10 0.99 \
+    --ubounds 10 10 10 \
     --output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.no_mig.demo.params \
-	--force-convergence 100 \
+	--force-convergence 50 \
+    --optimizations 20 \
 	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-    --grids 40 50 60 \
 	--cpus 4

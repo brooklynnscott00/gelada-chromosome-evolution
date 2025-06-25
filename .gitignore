@@ -37,4 +37,5 @@ sample_region_bams/
 RAxML/
 angsd-sfs/
 samtools-depth/
-
+smcpp_results/
+angsd-joint-sfs/
