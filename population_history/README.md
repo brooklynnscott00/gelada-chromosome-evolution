@@ -224,3 +224,5 @@ sbatch --array=68-88 population_history/smc/cen-sou.vcf2smc.SOU.sh #    jobID: 2
 sbatch population_history/smc/cen-sou.estimation.CEN.sh #   28564212
 sbatch --partition=general --time=24:00:00 --mem=128G population_history/smc/cen-sou.estimation.SOU.sh #    28564255
 ```
+`sbatch --array=68-88 population_history/smc/cen-sou.joint-fs.12.sh`    jobID: 28626710
+`sbatch --array=68-88 population_history/smc/cen-sou.joint-fs.21.sh`    jobID: 28626713
