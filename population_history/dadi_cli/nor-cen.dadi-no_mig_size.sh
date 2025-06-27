@@ -20,14 +20,14 @@ source activate /scratch/nsnyderm/conda_env/dadi-gpu
 
 mkdir -p dadi_results
 mkdir -p dadi_results/nor-cen
+mkdir -p no_mig_size_1/
 
-dadi-cli InferDM --fs dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.lowpass.folded.fs \
+dadi-cli InferDM --fs dadi_results/nor-cen/no_mig_size_1/${dataset}.nor-cen.autosomes.noncoding.lowpass.folded.fs \
     --model no_mig_size \
     --nomisid \
     --p0 1.3806424180040722e-06 1.003394540411702e-08 0.062424504502346545 0.2846462213802358 6.516641410323098e-09 0.02602514468755817 \
     --lbounds 1e-8 1e-9 1e-4 1e-2 1e-11 1e-3 \
     --ubounds 1e-4 1e-7 0.99 10 1e-8 0.99 \
-    --optimizations 10 \
     --output-prefix dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.no_mig_size.demo.params \
-    --force-convergence 50 \
+    --force-convergence 100 \
     --cpus 4

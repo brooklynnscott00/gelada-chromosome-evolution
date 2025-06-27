@@ -20,8 +20,10 @@ no migration
 
 no migration with size change 
 `sbatch population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`	jobID: 28470377 **timeout**
-`sbatch --time=4:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh` jobID: 28476024
-`sbatch --partition=general --time=1-00:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`  jobID: 28476030
+`sbatch --time=4:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh` jobID: 28476024 **timeout**
+`sbatch --partition=general --time=1-00:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`  jobID: 28476030 **timeout**
+`sbatch --partition=general --time=1-00:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`  jobID: 28561149
+
 
 symmetrical migration
 `sbatch population_history/dadi_cli/nor-cen.dadi-sym_mig.sh`	jobID: 28471227 **warning**
@@ -85,7 +87,7 @@ dadi-cli InferDM --fs dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowp
 	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
 	--maxtime 1 \
 	--cpus 4
-
+`sbatch --time=4:00:00 population_history/dadi_cli/cen-sou.dadi-IM.sh` jobID: 28561170
 
 
 
@@ -199,42 +201,30 @@ https://groups.google.com/g/dadi-user/c/esRqfOQ7Amc
 `sbatch population_history/smc/make-inaccessible-mask.sh`	jobID: 28472123 **DONE**
 
 ## northern central split
-## UPDATE TO INCLDUE PROPER MUTAION RATE
-VCF to SMC format using a quality negative mask 
-`sbatch population_history/smc/vcf2smc-nor-cen.NOR.sh`	jobID: 28472133	**DONE**
-`sbatch population_history/smc/vcf2smc-nor-cen.CEN.sh`	jobID: 28472154	**DONE**
 
-Estimation using a quality negative mask
-`sbatch population_history/smc/nor-cen.estimation.NOR.sh`	jobID: 28472255 **DONE**
-`sbatch population_history/smc/nor-cen.estimation.CEN.sh`	jobID: 28472562 **DONE**
+```shell
+sbatch --array=68-88 population_history/smc/vcf2smc-nor-cen.NOR.sh
+sbatch --array=68-88 population_history/smc/vcf2smc-nor-cen.CEN.sh
+sbatch population_history/smc/nor-cen.estimation.NOR.sh
+sbatch population_history/smc/nor-cen.estimation.CEN.sh
+sbatch --array=68-88 population_history/smc/nor-cen.joint-fs.12.sh # jobID: 28563838
+sbatch --array=68-88 population_history/smc/nor-cen.joint-fs.21.sh # jobID: 28564166
+sbatch population_history/smc/nor-cen.split-time.sh # jobID: 28565234
+```
 
-Joint fs using a quality negative mask 
-`sbatch population_history/smc/nor-cen.joint-fs.12.sh`  jobID: 28491329 **failed**
-`sbatch population_history/smc/nor-cen.joint-fs.12.sh`  jobID: 28491772 **DONE**
+`sbatch population_history/smc/nor-cen.plot.sh` jobID: 28567066
 
-`sbatch population_history/smc/nor-cen.joint-fs.21.sh`  jobID: 28491339 **failed**
-`sbatch population_history/smc/nor-cen.joint-fs.21.sh`  jobID: 28491778 **failed**
-`sbatch population_history/smc/nor-cen.joint-fs.21.sh`  jobID: 28491844 **DONE**
 
-Estimate split time 
-`sbatch population_history/smc/nor-cen.split-time.sh`   jobID: 28491442 **failed**
-`sbatch population_history/smc/nor-cen.split-time.sh`   jobID: 28491452 **OOM**
-`sbatch --mem=32G population_history/smc/nor-cen.split-time.sh` jobID: 28491469 **failed**
-`sbatch --mem=32G population_history/smc/nor-cen.split-time.sh` jobID: 28491970 **failed**
-`sbatch --mem=32G population_history/smc/nor-cen.split-time.sh` jobID: 28492008 **failed**
-
-smc++ plot joint.pdf split/model.final.json
-
-# split time
-sbatch scripts/smcpp-split-all_regions.sh
-jobID: 13943812 **DONE**
 
 ## central southern split
 
-VCF to SMC format using a quality negative mask 
-`sbatch population_history/smc/cen-sou.vcf2smc.CEN.sh`  jobID: 28491847 **DONE**
-`sbatch population_history/smc/cen-sou.vcf2smc.SOU.sh`  jobID: 28491853 **DONE**
+```shell
+sbatch --array=68-88 population_history/smc/cen-sou.vcf2smc.CEN.sh #    jobID: 28563445 
+sbatch --array=68-88 population_history/smc/cen-sou.vcf2smc.SOU.sh #    jobID: 28563446
+```
 
-Estimation using a quality negative mask 
-`sbatch population_history/smc/cen-sou.estimation.CEN.sh`   jobID: 28492029
-`sbatch population_history/smc/cen-sou.estimation.SOU.sh`   jobID: 28492030
+`sbatch population_history/smc/cen-sou.estimation.CEN.sh`   jobID: 28564212 **DONE**
+`sbatch --partition=general --time=24:00:00 --mem=128G --dependency=afternotok:28564212 population_history/smc/cen-sou.estimation.CEN.sh`   jobID: 28564252
+
+`sbatch population_history/smc/cen-sou.estimation.SOU.sh`   jobID: 28564219 **OOM**
+`sbatch --partition=general --time=24:00:00 --mem=128G --dependency=afternotok:28564219 population_history/smc/cen-sou.estimation.SOU.sh`   jobID: 28564255

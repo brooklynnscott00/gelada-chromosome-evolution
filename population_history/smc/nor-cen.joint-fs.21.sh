@@ -14,7 +14,7 @@
 #SBATCH --export=NONE
 #SBATCH --array=68-88
 
-mkdir -p smcpp_results/nor-cen/joint_fs
+mkdir -p smcpp_results/nor-cen/joint_fs_no_mask
 
 sampleList=("GUA001" "GUA002" "GUA003" "FRZ001" "FRZ002" "FRZ003" "FRZ004" "FRZ005" "FRZ006" "FRZ007" "FRZ009") 
 
@@ -23,16 +23,13 @@ central='GUA001,GUA002,GUA003,FRZ001,FRZ002,FRZ003,FRZ004,FRZ005,FRZ006,FRZ007,F
 southern='ERR12892801,ERR12892802,LID_1074578,LID_1074772,LID_1074773,LID_1074778,LID_1074779,LID_1074781,LID_1074784.LID_1074786,LID_1074787'
 
 vcf='vcf/nor-cen.quality-filtered.autosomes_only.vcf.gz'
-mask='smcpp_results/nor-cen/nor-cen.inaccessible-mask.bed.gz'
-
 
 for i in "${sampleList[@]}";
 do
     singularity run -B /scratch/brscott4/gelada/ /scratch/brscott4/gelada/smcpp/docker_smcpp.sif \
         vcf2smc \
         -d "${i}" "${i}" \
-        --mask ${mask} \
         ${vcf} \
-        smcpp_results/nor-cen/joint_fs/pop21.cen-"${i}".NC_0376${SLURM_ARRAY_TASK_ID}.1.quality_filtered.smc.gz NC_0376${SLURM_ARRAY_TASK_ID}.1 \
+        smcpp_results/nor-cen/joint_fs_no_mask/pop21.cen-"${i}".NC_0376${SLURM_ARRAY_TASK_ID}.1.smc.gz NC_0376${SLURM_ARRAY_TASK_ID}.1 \
         cen:${central} nor:${northern}
 done

@@ -17,7 +17,7 @@
 # array ID is associated with chromosome ID
 # 68 - 88
 
-mkdir -p smcpp_results/cen-sou/smcformat_quality_mask/
+mkdir -p smcpp_results/cen-sou/smcformat_no_mask
 
 sampleList=("GUA001" "GUA002" "GUA003" "FRZ001" "FRZ002" "FRZ003" "FRZ004" "FRZ005" "FRZ006" "FRZ007" "FRZ009")
 
@@ -26,14 +26,12 @@ central='GUA001,GUA002,GUA003,FRZ001,FRZ002,FRZ003,FRZ004,FRZ005,FRZ006,FRZ007,F
 southern='ERR12892801,ERR12892802,LID_1074578,LID_1074772,LID_1074773,LID_1074778,LID_1074779,LID_1074781,LID_1074784.LID_1074786,LID_1074787'
 
 vcf='vcf/cen-sou.quality-filtered.autosomes_only.vcf.gz'
-mask='smcpp_results/cen-sou/cen-sou.inaccessible-mask.bed.gz'
 
 for i in "${sampleList[@]}";
 do
     singularity run -B /scratch/brscott4/gelada-chromosome-evolution/ /scratch/brscott4/gelada/smcpp/docker_smcpp.sif \
     vcf2smc \
     -d "${i}" "${i}" \
-    --mask ${mask} \
-    ${vcf} smcpp_results/cen-sou/smcformat_quality_mask/cen-"${i}".NC_0376${SLURM_ARRAY_TASK_ID}.1.quality_filtered.smc.gz NC_0376${SLURM_ARRAY_TASK_ID}.1 \
+    ${vcf} smcpp_results/cen-sou/smcformat_no_mask/cen-"${i}".NC_0376${SLURM_ARRAY_TASK_ID}.1.smc.gz NC_0376${SLURM_ARRAY_TASK_ID}.1 \
     cen:${central} 
 done 

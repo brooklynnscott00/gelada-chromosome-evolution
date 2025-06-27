@@ -13,14 +13,14 @@
 #SBATCH --mem=68G
 #SBATCH --export=NONE
 
-mkdir -p smcpp_results/cen-sou/quality_mask_output
+mkdir -p smcpp_results/cen-sou/estimation_no_mask
 
-inputDirectory="smcpp_results/cen-sou/smcformat_quality_mask/"
-outputDirectory="smcpp_results/cen-sou/quality_mask_output"
+inputDirectory="smcpp_results/cen-sou/smcformat_no_mask"
+outputDirectory="smcpp_results/cen-sou/estimation_no_mask"
 mutationRate=5.7e-09
 
 singularity run -B /scratch/brscott4/gelada-chromosome-evolution/ /scratch/brscott4/gelada/smcpp/docker_smcpp.sif \
     estimate \
-    -o ${outputDirectory}/model.central \
+    -o ${outputDirectory}/central \
     ${mutationRate} \
-    ${inputDirectory}cen*
+    ${inputDirectory}/cen*

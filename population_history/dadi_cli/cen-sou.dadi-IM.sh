@@ -20,6 +20,7 @@ source activate /scratch/nsnyderm/conda_env/dadi-gpu
 
 mkdir -p dadi_results
 mkdir -p dadi_results/cen-sou
+mkdir -p dadi_results/cen-sou/IM_1
 
 # increase number of optimizations, convergence, and grid size for final run throughs
 
@@ -30,8 +31,6 @@ dadi-cli InferDM --fs dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowp
     --lbounds 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 \
     --ubounds 10 10 100 10 10 10 \
 	--output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.IM.demo.params \
-	--force-convergence 50 \
-	--optimizations 10 \
+	--force-convergence 5 \
 	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-	--maxtime 1 \
 	--cpus 4

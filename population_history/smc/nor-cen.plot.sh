@@ -13,9 +13,10 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --export=NONE
 
-mkdir -p smcpp_results/nor-cen/split_no_mask
+mkdir -p smcpp_results/nor-cen/plot_no_mask
 
 singularity run -B /scratch/brscott4/gelada-chromosome-evolution/ /scratch/brscott4/gelada/smcpp/docker_smcpp.sif \
-	split \
-	-o smcpp_results/nor-cen/split_no_mask/ smcpp_results/nor-cen/estimate_no_mask/north/model.final.json smcpp_results/nor-cen/estimate_no_mask/central/model.final.json smcpp_results/nor-cen/joint_fs_no_mask/*.smc.gz
-
+	plot \
+	-g 11.67 -c \
+	smcpp_results/nor-cen/plot_no_mask/nor-cen.joint.pdf \
+	nor-cen/split_no_mask/model.final.json

@@ -3,10 +3,17 @@
 Scripts in this folder perform genotypes from population resequncing data. These analyses begin with bam files that have already been mapped to the gelada reference genome. For mapping scripts refer to [Chiou et al. 2022](https://www.nature.com/articles/s41559-022-01703-4)
 
 ### bam summary statistics
-# ```shell
-`sbatch --time=4:00:00 --mem=8G --partition=htc --array=1-149 wgs_processing/mosdepth-coverage.sh` jobID: 28530592
-# ```
+```shell
+sbatch --time=4:00:00 --mem=8G --partition=htc --array=1-149 wgs_processing/mosdepth-coverage.sh # jobID: 28530592 (DONE)
+sbatch --time=4:00:00 --mem=8G --partition=htc --array=1-149 wgs_processing/mosdepth-coverage.sh # jobID: 28530844 (DONE)
+```
 
+`sbatch --time=4:00:00 --mem=8G --partition=htc --array=1-149 wgs_processing/mosdepth-coverage.sh`	jobID: 28560863	**DONE**
+`sbatch --time=24:00:00 --mem=24G --partition=general --array=6 wgs_processing/mosdepth-coverage.sh`	jobID: 28565215
+
+`sbatch --time=4:00:00 --mem=8G --partition=htc --array=1-149 wgs_processing/samtools-coverage.sh`	jobID: 28561035	**DONE**
+
+`sbatch --time=4:00:00 --mem=8G --partition=htc --array=1-21 wgs_processing/vcftools-het.sh`	jobID: 28563202	**DONE**
 
 
 ### GATK Analysis pipeline
