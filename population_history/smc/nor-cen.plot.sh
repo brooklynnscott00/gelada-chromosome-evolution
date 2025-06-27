@@ -19,4 +19,4 @@ singularity run -B /scratch/brscott4/gelada-chromosome-evolution/ /scratch/brsco
 	plot \
 	-g 11.67 -c \
 	smcpp_results/nor-cen/plot_no_mask/nor-cen.joint.pdf \
-	nor-cen/split_no_mask/model.final.json
+	smcpp_results/nor-cen/split_no_mask/model.final.json

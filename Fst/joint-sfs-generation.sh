@@ -31,6 +31,3 @@ population_pair="1 2 3"
 slots=12
 
 parallel -j $slots scripts/angsd-joint-sfs-single.sh {1} {2} ::: $population_pair ::: $chromosome
-
-
-

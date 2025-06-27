@@ -212,8 +212,8 @@ sbatch --array=68-88 population_history/smc/nor-cen.joint-fs.21.sh # jobID: 2856
 sbatch population_history/smc/nor-cen.split-time.sh # jobID: 28565234
 ```
 
-`sbatch population_history/smc/nor-cen.plot.sh` jobID: 28567066
-
+`sbatch population_history/smc/nor-cen.plot.sh` jobID: 28567066 **failed**
+`sbatch population_history/smc/nor-cen.plot.sh` jobID: 28626551
 
 
 ## central southern split
@@ -221,10 +221,6 @@ sbatch population_history/smc/nor-cen.split-time.sh # jobID: 28565234
 ```shell
 sbatch --array=68-88 population_history/smc/cen-sou.vcf2smc.CEN.sh #    jobID: 28563445 
 sbatch --array=68-88 population_history/smc/cen-sou.vcf2smc.SOU.sh #    jobID: 28563446
+sbatch population_history/smc/cen-sou.estimation.CEN.sh #   28564212
+sbatch --partition=general --time=24:00:00 --mem=128G population_history/smc/cen-sou.estimation.SOU.sh #    28564255
 ```
-
-`sbatch population_history/smc/cen-sou.estimation.CEN.sh`   jobID: 28564212 **DONE**
-`sbatch --partition=general --time=24:00:00 --mem=128G --dependency=afternotok:28564212 population_history/smc/cen-sou.estimation.CEN.sh`   jobID: 28564252
-
-`sbatch population_history/smc/cen-sou.estimation.SOU.sh`   jobID: 28564219 **OOM**
-`sbatch --partition=general --time=24:00:00 --mem=128G --dependency=afternotok:28564219 population_history/smc/cen-sou.estimation.SOU.sh`   jobID: 28564255
