@@ -16,7 +16,7 @@ source scripts/_include_options.sh
 mkdir -p gvcf
 
 if [ "$SLURM_ARRAY_TASK_ID" -eq 1 ]; then
-	bcftools view --samples-file data/dadi.sample_list.NOR.CEN.txt -O z -o gvcf/nor-cen.cohort.g.vcf gvcf/cohort.g.vcf.gz
+	bcftools view --samples-file data/dadi.sample_list.NOR.CEN.txt -O z -o DI-gvcf/nor-cen.cohort.g.vcf DI-gvcf/cohort.g.vcf.gz
 else
-	bcftools view --samples-file data/dadi.sample_list.CEN.SOU.txt -O z -o gvcf/cen-sou.cohort.g.vcf gvcf/cohort.g.vcf.gz
+	bcftools view --samples-file data/dadi.sample_list.CEN.SOU.txt -O z -o DI-gvcf/cen-sou.cohort.g.vcf DI-gvcf/cohort.g.vcf.gz
 fi

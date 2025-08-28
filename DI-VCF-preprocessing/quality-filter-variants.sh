@@ -16,8 +16,8 @@ mkdir -p vcf
 if [ "$SLURM_ARRAY_TASK_ID" -eq 1 ]; then
 	java -jar ~/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar VariantFiltration \
 		--reference /scratch/brscott4/gelada/data/genome/${genome_path} \
-		--output  vcf/nor-cen.quality-filtered.vcf.gz \
-		--variant  vcf/nor-cen.vcf.gz \
+		--output  DI-vcf/nor-cen.quality-filtered.vcf.gz \
+		--variant  DI-vcf/nor-cen.vcf.gz \
 		--filter-name "QD" \
 		--filter "QD < 2.0" \
 		--filter-name "MQ" \
@@ -34,8 +34,8 @@ if [ "$SLURM_ARRAY_TASK_ID" -eq 1 ]; then
 else
 	java -jar ~/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar VariantFiltration \
 		--reference /scratch/brscott4/gelada/data/genome/${genome_path} \
-		--output  vcf/cen-sou.quality-filtered.vcf.gz \
-		--variant  vcf/cen-sou.vcf.gz \
+		--output  DI-vcf/cen-sou.quality-filtered.vcf.gz \
+		--variant  DI-vcf/cen-sou.vcf.gz \
 		--filter-name "QD" \
 		--filter "QD < 2.0" \
 		--filter-name "MQ" \

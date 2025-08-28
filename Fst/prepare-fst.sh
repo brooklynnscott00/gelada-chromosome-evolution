@@ -28,4 +28,4 @@ realSFS \
 	-sfs angsd-joint-sfs/northern-central.${chromosome}.ml \
 	-sfs angsd-joint-sfs/northern-southern.${chromosome}.ml \
 	-sfs angsd-joint-sfs/central-southern.${chromosome}.ml \
-	-fstout fst_out/
+	-fstout fst_out/fst-index-${chromosome}.idx

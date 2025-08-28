@@ -49,4 +49,4 @@ java -jar ~/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar CombineGVCFs \
    --variant /data/CEM/smacklab/gelada_project/gvcf-all/LID_1074784.tgel1.all.raw.g.vcf.gz \
    --variant /data/CEM/smacklab/gelada_project/gvcf-all/LID_1074786.tgel1.all.raw.g.vcf.gz \
    --variant /data/CEM/smacklab/gelada_project/gvcf-all/LID_1074787.tgel1.all.raw.g.vcf.gz \
-   -O gvcf/cohort.g.vcf.gz
+   -O DI-gvcf/cohort.g.vcf.gz

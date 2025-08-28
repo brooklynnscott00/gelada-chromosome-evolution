@@ -12,5 +12,5 @@
 
 module load bedtools2-2.30.0-gcc-11.2.0
 
-bedtools merge -i gvcf/cen-sou.cohort.autosomes_only.g.bed > gvcf/cen-sou.cohort.autosomes_only.merged.g.bed
-bedtools merge -i gvcf/nor-cen.cohort.autosomes_only.g.bed > gvcf/nor-cen.cohort.autosomes_only.merged.g.bed
+bedtools merge -i DI-gvcf/cen-sou.cohort.autosomes_only.g.bed > DI-gvcf/cen-sou.cohort.autosomes_only.merged.g.bed
+bedtools merge -i DI-gvcf/nor-cen.cohort.autosomes_only.g.bed > DI-gvcf/nor-cen.cohort.autosomes_only.merged.g.bed

@@ -27,8 +27,12 @@ nor-cen,cen-sou
 "
 population=$(echo "$populations" | tr -d '\n\r' | cut -d',' -f${SLURM_ARRAY_TASK_ID})
 
-dadi-cli Plot --fs dadi_results/${population}/dadi.${population}.autosomes.noncoding.lowpass.folded.fs \
-	--output dadi_results/plots/${dataset}.${population}.autosomes.noncoding.lowpass.folded.fs.pdf
+#dadi-cli Plot --fs dadi_results/${population}/dadi.${population}.autosomes.noncoding.lowpass.folded.fs \
+#	--output dadi_results/plots/${dataset}.${population}.autosomes.noncoding.lowpass.folded.fs.pdf
 
+dadi-cli Plot --fs dadi_results/simulation/IM.simDM.fs \
+	--output dadi_results/plots/dadi.IM.simDM.fs.pdf
+
+dadi-cli Plot --fs dadi_results/simulation/IM.simDM.fs --fs2 dadi_results/nor-cen/dadi.nor-cen.autosomes.noncoding.lowpass.folded.fs --output dadi_results/plots/dadi.nor-cen.autosomes.noncoding.vs.IM.simDM.pdf --model None
 
 

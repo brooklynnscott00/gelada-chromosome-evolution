@@ -10,5 +10,5 @@
 #SBATCH --time=4:00:00
 #SBATCH --mem=24G
 
-cat gvcf/cen-sou.cohort.autosomes_only.g.vcf.gz | awk '!/^#/ {print $1, $2-1, $2}' OFS="\t" > gvcf/cen-sou.cohort.autosomes_only.g.bed
-cat gvcf/nor-cen.cohort.autosomes_only.g.vcf.gz | awk '!/^#/ {print $1, $2-1, $2}' OFS="\t" > gvcf/nor-cen.cohort.autosomes_only.g.bed
+cat DI-gvcf/cen-sou.cohort.autosomes_only.g.vcf.gz | awk '!/^#/ {print $1, $2-1, $2}' OFS="\t" > DI-gvcf/cen-sou.cohort.autosomes_only.g.bed
+cat DI-gvcf/nor-cen.cohort.autosomes_only.g.vcf.gz | awk '!/^#/ {print $1, $2-1, $2}' OFS="\t" > DI-gvcf/nor-cen.cohort.autosomes_only.g.bed

@@ -2,7 +2,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-type=END
 #SBATCH --mail-user=brscott4@asu.edu
-#SBATCH --job-name="run-dadi-DI-nomig-size"
+#SBATCH --job-name="run-dadi-DI-nomig-size SOU CEN"
 #SBATCH --output=out/slurm-%j.out
 #SBATCH --error=out/slurm-%j.err
 #SBATCH --partition=htc
@@ -21,14 +21,14 @@ source activate /scratch/nsnyderm/conda_env/dadi-gpu
 mkdir -p dadi_results
 mkdir -p dadi_results/cen-sou
 
-dadi-cli InferDM --fs dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-    --p0 7.042e-05 5.742e-06 0.213 3.936 7.486e-08 0.330 \
+dadi-cli InferDM --fs dadi_results/cen-sou/${dataset}.cen-sou.6.22.autosomes.noncoding.lowpass.folded.fs \
+    --bestfit-p0-file dadi_results/cen-sou/dadi.cen-sou.6.22.autosomes.noncoding.lowpass.no_mig_size.demo.params.InferDM.bestfits \
     --model no_mig_size \
     --nomisid \
-    --lbounds 1e-7 1e-8 1e-2 1e-1 1e-10 1e-2 \
-    --ubounds 1e-4 1e-4 10 10 1e-6 110 \
-    --output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.no_mig_size.demo.params \
-	--force-convergence 50 \
-    --optimizations 20 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
+    --delta-ll 0.005 \
+    --lbounds 1e-10 1e-10 1e-3 1e-2 1e-15 1e-3 \
+    --ubounds 1e-4 1e-4 100 1000 1e-9 100 \
+    --output-prefix dadi_results/cen-sou/${dataset}.cen-sou.6.22.autosomes.noncoding.lowpass.no_mig_size.demo.params \
+	--force-convergence 100 \
+	--coverage-model dadi_results/cen-sou/${dataset}.cen-sou.6.22.autosomes.noncoding.lowpass.folded.fs.coverage.pickle \
 	--cpus 4

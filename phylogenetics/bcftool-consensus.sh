@@ -27,4 +27,3 @@ mkdir -p RAxML/
 mkdir -p RAxML/consensus/
 
 samtools faidx /scratch/brscott4/gelada/data/genome/${genome_path} NC_037668.1 | bcftools consensus -s ${sample} vcf-chr/dadi.tgel1.bootstrap.chrNC_037668.1.pas.vcf.gz -o RAxML/consensus/${sample}.fasta
-

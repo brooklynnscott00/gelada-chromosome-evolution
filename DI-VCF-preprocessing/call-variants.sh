@@ -17,12 +17,12 @@ if [ "$SLURM_ARRAY_TASK_ID" -eq 1 ]; then
   echo "Running GenotypeGVCFs for north/central"
   java -jar ~/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar GenotypeGVCFs \
      -R /scratch/brscott4/gelada/data/genome/${genome_path} \
-     -V gvcf/nor-cen.cohort.g.vcf \
-     -O vcf/nor-cen.vcf.gz
+     -V DI-gvcf/nor-cen.cohort.g.vcf \
+     -O DI-vcf/nor-cen.vcf.gz
 else
   echo "Running GenotypeGVCFs for central/southern"
   java -jar ~/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar GenotypeGVCFs \
      -R /scratch/brscott4/gelada/data/genome/${genome_path} \
-     -V gvcf/cen-sou.cohort.g.vcf \
-     -O vcf/cen-sou.vcf.gz
+     -V DI-gvcf/cen-sou.cohort.g.vcf \
+     -O DI-vcf/cen-sou.vcf.gz
 fi

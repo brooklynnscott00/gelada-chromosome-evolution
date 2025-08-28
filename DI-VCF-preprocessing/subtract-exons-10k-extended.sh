@@ -14,10 +14,10 @@ module load bedtools2-2.30.0-gcc-11.2.0
 source scripts/_include_options.sh
 mkdir -p vcf
 
-vcfs="vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats
-gvcf/cen-sou.cohort.autosomes_only.g.rm_repeats
-vcf/cen-sou.quality-filtered.autosomes_only.rm_repeats
-gvcf/nor-cen.cohort.autosomes_only.g.rm_repeats"
+vcfs="DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats
+DI-gvcf/cen-sou.cohort.autosomes_only.g.rm_repeats
+DI-vcf/cen-sou.quality-filtered.autosomes_only.rm_repeats
+DI-gvcf/nor-cen.cohort.autosomes_only.g.rm_repeats"
 
 vcf=$(echo "${vcfs}" | sed -n "${SLURM_ARRAY_TASK_ID}"p)
 

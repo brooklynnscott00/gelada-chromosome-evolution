@@ -40,3 +40,9 @@ samtools-depth/
 smcpp_results/
 angsd-joint-sfs/
 mosdepth-out/
+fst_out/
+DI-vcf/
+DI-gvcf/
+vcf-final/
+fst_out/
+fst_slidingwindow

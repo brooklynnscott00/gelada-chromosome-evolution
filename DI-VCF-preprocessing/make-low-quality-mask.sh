@@ -29,12 +29,12 @@ NC_037688.1
 # central and southern
 # bcftools index vcf/cen-sou.quality-filtered.autosomes_only.vcf.gz
 
-bcftools view -e 'FILTER="PASS"' vcf/cen-sou.quality-filtered.autosomes_only.vcf.gz | \
-  bcftools query -f '%CHROM\t%POS0\t%POS\n' > vcf/cen-sou.low_quality_mask.bed
+bcftools view -e 'FILTER="PASS"' DI-vcf/cen-sou.quality-filtered.autosomes_only.vcf.gz | \
+  bcftools query -f '%CHROM\t%POS0\t%POS\n' > DI-vcf/cen-sou.low_quality_mask.bed
 
 # northern and central
 # bcftools index vcf/nor-cen.quality-filtered.autosomes_only.vcf.gz
 
-bcftools view -e 'FILTER="PASS"' vcf/nor-cen.quality-filtered.autosomes_only.vcf.gz | \
-  bcftools query -f '%CHROM\t%POS0\t%POS\n' > vcf/nor-cen.low_quality_mask.bed
+bcftools view -e 'FILTER="PASS"' DI-vcf/nor-cen.quality-filtered.autosomes_only.vcf.gz | \
+  bcftools query -f '%CHROM\t%POS0\t%POS\n' > DI-vcf/nor-cen.low_quality_mask.bed
   

@@ -1,206 +1,136 @@
-# dadi_cli 
+# Population history analysis pipeline
 
-## generate frequency spectra
-`sbatch --mem=48G population_history/dadi_cli/generate-dadi-fs.sh`	jobID: 28173877	**DONE**
+## dadi-cli 
 
-## plot frequency spectra
-`sbatch --array=1-2 population_history/dadi_cli/plot-fs.sh`	jobID: 28414437	**DONE**
+Generate and plot frequency spectra:
+```shell
+$sbatch --mem=48G population_history/dadi_cli/generate-dadi-2dfs.sh
+$sbatch --array=1-2 population_history/dadi_cli/plot-fs.sh
+```
 
-## make another frequency spectra for both where they aren't low pass
-## compare frequncy spectra
+### northern-central analyses
 
-## demographic inference
-### northern/central analyses
-
-isolation with migration 
-`sbatch population_history/dadi_cli/nor-cen.dadi-IM.sh`	jobID: 28181915	**DONE**
-
-no migration
-`sbatch population_history/dadi_cli/nor-cen.dadi-no_mig.sh`	jobID: 28181918	**DONE**
+```shell
+$sbatch population_history/dadi_cli/nor-cen.dadi-IM.sh	# jobID: 28181915
+$sbatch population_history/dadi_cli/nor-cen.dadi-no_mig.sh	# jobID: 28181918
+$sbatch population_history/dadi_cli/nor-cen.dadi-sym_mig.sh	# jobID: 32047126
+$sbatch population_history/dadi_cli/nor-cen.dadi-asym_mig.sh	# jobID: 32047191
+```
 
 no migration with size change 
-`sbatch population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`	jobID: 28470377 **timeout**
-`sbatch --time=4:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh` jobID: 28476024 **timeout**
-`sbatch --partition=general --time=1-00:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`  jobID: 28476030 **timeout**
-`sbatch --partition=general --time=1-00:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`  jobID: 28561149
+`sbatch --partition=general --time=1-00:00:00 population_history/dadi_cli/nor-cen.dadi-no_mig_size.sh`	jobID: 32543519
 
+IM pre
+`sbatch --partition=general --time=24:00:00 --mem=32G population_history/dadi_cli/nor-cen.dadi-IM_pre.sh`	jobID: 32543607
 
-symmetrical migration
-`sbatch population_history/dadi_cli/nor-cen.dadi-sym_mig.sh`	jobID: 28471227 **warning**
-`sbatch population_history/dadi_cli/nor-cen.dadi-sym_mig.sh`    jobID: 28476052 **warnings**
-`sbatch population_history/dadi_cli/nor-cen.dadi-sym_mig.sh`    jobID: 28476276 **warnings**
+ancient asymmetrical migration
+`sbatch --partition=general --time=24:00:00 population_history/dadi_cli/nor-cen.dadi-anc_asym_mig.sh`	jobID: 32544596
 
-### central/southern analyses
+`sbatch population_history/dadi_cli/nor-cen.dadi-anc_asym_mig_size.sh`	jobID: 32047145	**timeout**
 
---maxtime
+`sbatch population_history/dadi_cli/nor-cen.dadi-asym_mig_size.sh`	jobID: 32047150	**timeout**
+
+# simulation 
+`sbatch population_history/dadi_cli/dadi-simulate-IM.sh`	jobID: 31888526
+`sbatch population_history/dadi_cli/plot-fs.sh`	jobID: 31888939
+
+### central-southern analyses
+
+```shell
+$sbatch --partition=general --time=24:00:00 population_history/dadi_cli/cen-sou.dadi-no_mig_size.sh # jobID: 32420743
+$sbatch --partition=general --time=24:00:00 population_history/dadi_cli/cen-sou.dadi-sym_mig.sh # jobID: 32420989
+```
 
 isolation with migration
-`sbatch population_history/dadi_cli/cen-sou.dadi-IM.sh`	jobID: 28182480	**timeout**
-`sbatch --partition=general --time=12:00:00 population_history/dadi_cli/cen-sou.dadi-IM.sh`	jobID: 28468831
-`sbatch --time=1:00:00 population_history/dadi_cli/cen-sou.dadi-IM.sh`	jobID: 28472708 **timeout**
-dadi-cli InferDM --fs dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-	--model IM \
-	--p0 0.0671 0.0867 10 0.1 0.006 0.0112 \
-    --nomisid \
-    --lbounds 1e-3 1e-3 1e-1 1e-3 1e-4 1e-3 \
-    --ubounds 0.99 0.99 100 10 1e-1 0.99 \
-	--output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.IM.demo.params \
-	--force-convergence 50 \
-	--optimizations 20 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-	--cpus 4
-`sbatch --time=4:00:00 population_history/dadi_cli/cen-sou.dadi-IM.sh`  jobID: 28476095
-dadi-cli InferDM --fs dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-	--model IM \
-	--p0 0.0671 0.0867 10 0.1 0.006 0.0112 \
-    --nomisid \
-    --lbounds 1e-3 1e-3 1e-1 1e-3 1e-4 1e-3 \
-    --ubounds 0.99 0.99 100 10 1e-1 0.99 \
-	--output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.IM.demo.params \
-	--force-convergence 50 \
-	--optimizations 10 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-	--cpus 4
-`sbatch --time=4:00:00 population_history/dadi_cli/cen-sou.dadi-IM.sh`  jobID: 28476303
-dadi-cli InferDM --fs dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-	--model IM \
-	--p0 0.0671 0.0867 10 0.1 0.006 0.0112 \
-    --nomisid \
-    --lbounds 1e-3 1e-3 1e-1 1e-3 1e-4 1e-3 \
-    --ubounds 0.99 0.99 100 10 1e-1 0.99 \
-	--output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.IM.demo.params \
-	--force-convergence 50 \
-	--optimizations 10 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-	--maxtime 1 \
-	--cpus 4
-`sbatch --time=4:00:00 population_history/dadi_cli/cen-sou.dadi-IM.sh`  jobID: 28476468
-dadi-cli InferDM --fs dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-	--model IM \
-	--p0 0.0671 0.0867 10 0.1 0.006 0.0112 \
-    --nomisid \
-    --lbounds 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 \
-    --ubounds 10 10 100 10 10 10 \
-	--output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.IM.demo.params \
-	--force-convergence 50 \
-	--optimizations 10 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-	--maxtime 1 \
-	--cpus 4
-`sbatch --time=4:00:00 population_history/dadi_cli/cen-sou.dadi-IM.sh` jobID: 28561170
-
-
-
-
-
-
-
+`sbatch --partition=general --time=24:00:00 --mem=64G population_history/dadi_cli/cen-sou.dadi-IM.sh`	jobID: 32544907
 
 no migration 
-`sbatch population_history/dadi_cli/cen-sou.dadi-no_mig.sh`	jobID: 28182313	**timeout**
-`sbatch --partition=general --time=12:00:00 population_history/dadi_cli/cen-sou.dadi-no_mig.sh`	jobID: 28468846
-dadi-cli InferDM --fs dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-    --p0 0.3692819110903314 4.902925495516077 0.5391757626755409 \
-    --model no_mig \
-    --nomisid \
-    --lbounds 1e-3 1e-1 1e-3 \
-    --ubounds 0.99 10 0.99 \
-    --output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.no_mig.demo.params \
-	--force-convergence 100 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-    --grids 40 50 60 \
-	--cpus 4
-`sbatch --time=1:00:00 population_history/dadi_cli/cen-sou.dadi-no_mig.sh`	jobID: 28472791 **timeout**
-dadi-cli InferDM --fs dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-    --p0 0.369 4.903 0.539 \
-    --model no_mig \
-    --nomisid \
-    --lbounds 1e-3 1e-1 1e-3 \
-    --ubounds 10 10 10 \
-    --output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.no_mig.demo.params \
-	--force-convergence 50 \
-    --optimizations 20 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-	--cpus 4
+`sbatch --partition=general --time=24:00:00 population_history/dadi_cli/cen-sou.dadi-no_mig.sh`	jobID: 32544936
 
-no migration with size change 
-`sbatch population_history/dadi_cli/cen-sou.dadi-no_mig_size.sh`	jobID: 28182774	**timeout**
-`sbatch --partition=general --time=12:00:00 population_history/dadi_cli/cen-sou.dadi-no_mig_size.sh`	JOBID: 28468927
-dadi-cli InferDM --fs dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-    --p0 7.041749815893527e-05 5.74172413630268e-06 0.21186611274699285 3.936396844907854 7.486312764449154e-08 0.3296989171413364 \
-    --model no_mig_size \
-    --nomisid \
-    --lbounds 1e-7 1e-8 1e-2 1e-1 1e-10 1e-2 \
-    --ubounds 1e-4 1e-4 10 10 1e-6 110 \
-    --output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.no_mig_size.demo.params \
-	--force-convergence 100 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-    --grids 40 50 60 \
-	--cpus 4
-`sbatch --time=1:00:00 population_history/dadi_cli/cen-sou.dadi-no_mig_size.sh`	jobID: 28472837 **timeout**
-dadi-cli InferDM --fs dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-    --p0 7.042e-05 5.742e-06 0.213 3.936 7.486e-08 0.330 \
-    --model no_mig_size \
-    --nomisid \
-    --lbounds 1e-7 1e-8 1e-2 1e-1 1e-10 1e-2 \
-    --ubounds 1e-4 1e-4 10 10 1e-6 110 \
-    --output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.no_mig_size.demo.params \
-	--force-convergence 50 \
-    --optimizations 20 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-	--cpus 4
-
-symmetrical migration
-`sbatch population_history/dadi_cli/cen-sou.dadi-sym_mig.sh`	jobID: 28182764	**timeout**
-`sbatch --partition=general --time=7-00:00:00 population_history/dadi_cli/cen-sou.dadi-sym_mig.sh`	jobID: 28468964
-dadi-cli InferDM --fs dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-    --p0 0.7505340443081098 18.009061899475363 0.14030037448281635 6.736930348692804 \
-    --model sym_mig \
-    --nomisid \
-    --lbounds 1e-2 1e-1 1e-3 1e-2 \
-    --ubounds 10 100 10 100 \
-    --output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.sym_mig.demo.params \
-    --force-convergence 100 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-    --grids 40 50 60 \
-    --cpus 4
-`sbatch --time=1:00:00 population_history/dadi_cli/cen-sou.dadi-sym_mig.sh`	jobID: 28472876 **timeout**
-dadi-cli InferDM --fs dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.folded.fs \
-    --p0 0.751 18.009 0.1403 6.737 \
-    --model sym_mig \
-    --nomisid \
-    --lbounds 1e-2 1e-1 1e-3 1e-2 \
-    --ubounds 10 100 10 100 \
-    --output-prefix dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.lowpass.sym_mig.demo.params \
-    --force-convergence 50 \
-    --optimizations 20 \
-	--coverage-model dadi_results/cen-sou/dadi.cen-sou.autosomes.noncoding.lowpass.folded.fs.coverage.pickle 22 22 \
-    --cpus 4
 
 founder_asym
-`sbatch population_history/dadi_cli/cen-sou.dadi-founder_asym.sh`	jobID: 28470360	**failed**
-`sbatch population_history/dadi_cli/cen-sou.dadi-founder_asym.sh`	jobID: 28470706	**timeout**
-`sbatch --partition=general --time=12:00:00 population_history/dadi_cli/cen-sou.dadi-founder_asym.sh`	jobID: 28472129
+`sbatch --partition=general --time=24:00:00 population_history/dadi_cli/cen-sou.dadi-founder_asym.sh`	jobID: 32544937
 
 founder_nomig
+
 founder_nomig_admix_early
 
+### southern analysis single population 
 
-## statistical testing 
+Generate a 1D sfs for the southern population. Set the number of haplotypes ranging from 2-22
+```shell
+$sbatch --mem=32G population_history/dadi_cli/sou_single/generate-fs.sh
+$sbatch --mem=32G population_history/dadi_cli/sou_single/plot-fs.sh
+```
 
-## simulation 
+Check the projection of each frequency spectra
+```shell
+$python population_history/dadi_cli/sou_single/check_projection.py
+
+dadi_results/southern/dadi.southern.18.autosomes.noncoding.lowpass.folded.fs: S = 259061.44258373184
+dadi_results/southern/dadi.southern.16.autosomes.noncoding.lowpass.folded.fs: S = 546894.9788115575
+dadi_results/southern/dadi.southern.6.autosomes.noncoding.lowpass.folded.fs: S = 3316896.41645416
+dadi_results/southern/dadi.southern.22.autosomes.noncoding.lowpass.folded.fs: S = 17356.0
+dadi_results/southern/dadi.southern.12.autosomes.noncoding.lowpass.folded.fs: S = 1539096.5292184567
+dadi_results/southern/dadi.southern.8.autosomes.noncoding.lowpass.folded.fs: S = 3054079.216228148
+dadi_results/southern/dadi.southern.2.autosomes.noncoding.lowpass.folded.fs: S = 1378599.445609292
+dadi_results/southern/dadi.southern.10.autosomes.noncoding.lowpass.folded.fs: S = 2280856.0431641378
+dadi_results/southern/dadi.southern.4.autosomes.noncoding.lowpass.folded.fs: S = 2571184.7473014756
+dadi_results/southern/dadi.southern.14.autosomes.noncoding.lowpass.folded.fs: S = 965335.3334850064
+dadi_results/southern/dadi.southern.20.autosomes.noncoding.lowpass.folded.fs: S = 90539.59740259734
+```
+
+```shell
+$sbatch --mem=32G --partition=general --time=24:00:00 population_history/dadi_cli/sou_single/southern.dadi-three_epoch_inbreeding.sh
+$sbatch --mem=32G --partition=general --time=24:00:00 population_history/dadi_cli/sou_single/southern.dadi-two_epoch.sh
+```
+
+`sbatch --mem=32G --partition=htc --time=4:00:00 population_history/dadi_cli/sou_single/southern.dadi-bottlegrowth_1d.sh`	jobID: 32094028	**timeout**
+`sbatch --mem=32G --partition=general --time=24:00:00 population_history/dadi_cli/sou_single/southern.dadi-bottlegrowth_1d.sh`	jobID: 32297977
+
+`sbatch --mem=32G --partition=htc --time=4:00:00 population_history/dadi_cli/sou_single/southern.dadi-growth.sh`	jobID: 32094033	**timeout**
+`sbatch --mem=32G --partition=general --time=24:00:00 population_history/dadi_cli/sou_single/southern.dadi-growth.sh`	jobID: 32297980
+
+`sbatch --mem=32G population_history/dadi_cli/sou_single/southern.dadi-snm_1d.sh`	jobID: 31980439	**DONE**
+
+`sbatch --mem=32G --partition=htc --time=4:00:00 population_history/dadi_cli/sou_single/southern.dadi-three_epoch.sh`	jobID: 32094039	**timeout**
+`sbatch --mem=32G --partition=general --time=24:00:00 population_history/dadi_cli/sou_single/southern.dadi-three_epoch.sh`	jobID: 32298080
 
 
-## helpful links 
-Data is not masked:
 
-https://groups.google.com/g/dadi-user/c/esRqfOQ7Amc
 
-# smcpp
+#### central analysis single population
+`sbatch --mem=32G population_history/dadi_cli/cen_single/generate-fs.sh`  jobID: 28877591	**failed**
+`sbatch --mem=32G population_history/dadi_cli/cen_single/generate-fs.sh`	jobID: 28877602	**DONE**
 
-`sbatch population_history/smc/make-inaccessible-mask.sh`	jobID: 28472123 **DONE**
+`sbatch --mem=32G population_history/dadi_cli/cen_single/plot-fs.sh`	jobID: 28877680	**done**
 
-## northern central split
+`sbatch --mem=32G population_history/dadi_cli/cen_single/central.bottlegrowth_1d.sh`	jobID: 28877683	**timeout**
+`sbatch --mem=32G --time=4:00:00 population_history/dadi_cli/cen_single/central.bottlegrowth_1d.sh`	jobID: 28878186	**timeout
+
+`sbatch --mem=32G population_history/dadi_cli/cen_single/central.growth.sh`	jobID: 28877685	**timeout**
+`sbatch --mem=32G --time=4:00:00 population_history/dadi_cli/cen_single/central.growth.sh`	jobID: 28878192	**timeout**
+
+`sbatch --mem=32G population_history/dadi_cli/cen_single/central.snm_1d.sh`	jobID: 28877686	**DONE**
+
+`sbatch --mem=32G population_history/dadi_cli/cen_single/central.three_epoch.sh`	jobID: 28877689	**timeout**
+`sbatch --mem=32G --time=4:00:00 population_history/dadi_cli/cen_single/central.three_epoch.sh`	jobID: 28878176	**timeout**
+
+`sbatch --mem=32G population_history/dadi_cli/cen_single/central.three_epoch_inbreeding.sh`	jobID: 28877714	**timeout**
+`sbatch --mem=32G --time=4:00:00 population_history/dadi_cli/cen_single/central.three_epoch_inbreeding.sh`	jobID: 28878173	**timeout**
+
+`sbatch --mem=32G population_history/dadi_cli/cen_single/central.two_epoch.sh`	jobID: 28877715	**Timeout**
+`sbatch --mem=32G --time=4:00:00 population_history/dadi_cli/cen_single/central.two_epoch.sh`	jobID: 28878164	**timoeut**
+
+
+
+## smcpp
+
+```shell
+$sbatch population_history/smc/make-inaccessible-mask.sh`
+```
+
+### northern-central split
 
 ```shell
 sbatch --array=68-88 population_history/smc/vcf2smc-nor-cen.NOR.sh
@@ -210,19 +140,18 @@ sbatch population_history/smc/nor-cen.estimation.CEN.sh
 sbatch --array=68-88 population_history/smc/nor-cen.joint-fs.12.sh # jobID: 28563838
 sbatch --array=68-88 population_history/smc/nor-cen.joint-fs.21.sh # jobID: 28564166
 sbatch population_history/smc/nor-cen.split-time.sh # jobID: 28565234
+sbatch population_history/smc/nor-cen.plot.sh # 28626551
 ```
 
-`sbatch population_history/smc/nor-cen.plot.sh` jobID: 28567066 **failed**
-`sbatch population_history/smc/nor-cen.plot.sh` jobID: 28626551
-
-
-## central southern split
+### central-southern split
 
 ```shell
 sbatch --array=68-88 population_history/smc/cen-sou.vcf2smc.CEN.sh #    jobID: 28563445 
 sbatch --array=68-88 population_history/smc/cen-sou.vcf2smc.SOU.sh #    jobID: 28563446
 sbatch population_history/smc/cen-sou.estimation.CEN.sh #   28564212
 sbatch --partition=general --time=24:00:00 --mem=128G population_history/smc/cen-sou.estimation.SOU.sh #    28564255
+sbatch --array=68-88 population_history/smc/cen-sou.joint-fs.12.sh # 28627210, 28632993
+sbatch --array=68-88 population_history/smc/cen-sou.joint-fs.21.sh # 28627221, 28633025
+sbatch --mem=400G population_history/smc/cen-sou.split-time.sh
+sbatch population_history/smc/cen-sou.plot.sh
 ```
-`sbatch --array=68-88 population_history/smc/cen-sou.joint-fs.12.sh`    jobID: 28626710
-`sbatch --array=68-88 population_history/smc/cen-sou.joint-fs.21.sh`    jobID: 28626713

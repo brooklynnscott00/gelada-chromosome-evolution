@@ -28,7 +28,7 @@ dadi-cli InferDM --fs dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncodin
     --p0 0.199 0.144 0.66 0.130 \
     --lbounds 1e-4 1e-4 1e-4 1e-4 \
     --ubounds 100 100 100 100 \
-    --output-prefix dadi_results/nor-cen/sym_mig_1/${dataset}.nor-cen.autosomes.noncoding.sym_mig.demo.params \
+    --output-prefix dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.sym_mig.demo.params \
     --force-convergence 100 \
     --cpus 4
 
