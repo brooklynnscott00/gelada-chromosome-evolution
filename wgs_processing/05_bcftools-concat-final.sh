@@ -31,4 +31,13 @@ elif [ $SLURM_ARRAY_TASK_ID -eq 3 ]; then
 elif [ $SLURM_ARRAY_TASK_ID -eq 4 ]; then
     bcftools concat -Oz -o vcf-final/dadi.tgel1.bootstrap.whole_genome.pas.vcf.gz $(for i in $(cut -f1 data/tgel1_chromosomes.bed); do echo vcf-chr/dadi.tgel1.bootstrap.chr$(printf $i | xargs).pas.vcf.gz; done)
     bcftools index -t vcf-final/dadi.tgel1.bootstrap.whole_genome.pas.vcf.gz
+
+elif [ $SLURM_ARRAY_TASK_ID -eq 5 ]; then
+    bcftools concat -Oz -o vcf-final/dadi.tgel1.bootstrap.whole_genome.pas_nofilter.vcf.gz $(for i in $(cut -f1 data/tgel1_chromosomes.bed); do echo vcf-chr/dadi.tgel1.bootstrap.chr$(printf $i | xargs).pas_nofilter.sorted.vcf.gz; done)
+    bcftools index -t vcf-final/dadi.tgel1.bootstrap.whole_genome.pas_nofilter.vcf.gz
+
+elif [ $SLURM_ARRAY_TASK_ID -eq 6 ]; then
+    bcftools concat -Oz -o vcf-final/dadi.tgel1.bootstrap.whole_genome.snv_nofilter.vcf.gz $(for i in $(cut -f1 data/tgel1_chromosomes.bed); do echo vcf-chr/dadi.tgel1.bootstrap.chr$(printf $i | xargs).snv_nofilter.sorted.vcf.gz; done)
+    bcftools index -t vcf-final/dadi.tgel1.bootstrap.whole_genome.snv_nofilter.vcf.gz
+
 fi

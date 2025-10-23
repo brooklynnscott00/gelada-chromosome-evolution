@@ -27,11 +27,17 @@ module load bcftools-1.14-gcc-11.2.0
 module load htslib-1.21-gcc-11.2.0
 
 # pass genotyping and quality filters
-bcftools concat -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz $(for i in $(grep --color=none -nE '^'${chr}':' data/${genome}_regions.txt | cut -d ':' -f 1); do echo vcf-split/${dataset}.${genome}.bootstrap.region.$(printf "%04d" $i | xargs).chr${chr_print}.pas.vcf.gz; done)
-
-tabix -p vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz
+# bcftools concat -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz $(for i in $(grep --color=none -nE '^'${chr}':' data/${genome}_regions.txt | cut -d ':' -f 1); do echo vcf-split/${dataset}.${genome}.bootstrap.region.$(printf "%04d" $i | xargs).chr${chr_print}.pas.vcf.gz; done)
+# tabix -p vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas.vcf.gz
 
 # no quality filters
-bcftools concat -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv.vcf.gz $(for i in $(grep --color=none -nE '^'${chr}':' data/${genome}_regions.txt | cut -d ':' -f 1); do echo vcf-split/${dataset}.${genome}.bootstrap.region.$(printf "%04d" $i | xargs).chr${chr_print}.snv.vcf.gz; done)
+# bcftools concat -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv.vcf.gz $(for i in $(grep --color=none -nE '^'${chr}':' data/${genome}_regions.txt | cut -d ':' -f 1); do echo vcf-split/${dataset}.${genome}.bootstrap.region.$(printf "%04d" $i | xargs).chr${chr_print}.snv.vcf.gz; done)
+# tabix -p vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv.vcf.gz
 
-tabix -p vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv.vcf.gz
+bcftools concat -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas_nofilter.vcf.gz $(for i in $(grep --color=none -nE '^'${chr}':' data/${genome}_regions.txt | cut -d ':' -f 1); do echo vcf-split/${dataset}.${genome}.bootstrap.region.$(printf "%04d" $i | xargs).chr${chr_print}.pas_nofilter.vcf.gz; done)
+bcftools sort -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas_nofilter.sorted.vcf.gz vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas_nofilter.vcf.gz
+tabix -p vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.pas_nofilter.sorted.vcf.gz
+
+bcftools concat -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv_nofilter.vcf.gz $(for i in $(grep --color=none -nE '^'${chr}':' data/${genome}_regions.txt | cut -d ':' -f 1); do echo vcf-split/${dataset}.${genome}.bootstrap.region.$(printf "%04d" $i | xargs).chr${chr_print}.snv_nofilter.vcf.gz; done)
+bcftools sort -Oz -o vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv_nofilter.sorted.vcf.gz vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv_nofilter.vcf.gz
+tabix -p vcf vcf-chr/${dataset}.${genome}.bootstrap.chr${chr_out}.snv_nofilter.sorted.vcf.gz

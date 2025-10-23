@@ -22,19 +22,34 @@ mkdir -p dadi_results
 mkdir -p dadi_results/cen-sou
 mkdir -p dadi_results/nor-cen
 
+# dadi-cli GenerateFs \
+#     --vcf DI-vcf/cen-sou.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf.gz \
+#     --pop-info data/cen-sou.popfile.txt \
+#     --pop-ids CEN SOU \
+#     --projections 20 6 \
+#     --output dadi_results/cen-sou/${dataset}.cen-sou.20.6.autosomes.noncoding.lowpass.folded.fs \
+#     --calc-coverage
+
 dadi-cli GenerateFs \
-    --vcf vcf/cen-sou.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf.gz \
+    --vcf DI-vcf/cen-sou.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf.gz \
     --pop-info data/cen-sou.popfile.txt \
     --pop-ids CEN SOU \
-    --projections 6 22 \
-    --output dadi_results/cen-sou/${dataset}.cen-sou.6.22.autosomes.noncoding.lowpass.folded.fs \
+    --projections 20 6 \
+    --output dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.rm_common_high_het_sites_0.8.20.6.lowpass.folded.fs \
     --calc-coverage
 
-dadi-cli GenerateFs \
-    --vcf vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf.gz \
-    --pop-info data/nor-cen.popfile.txt \
-    --pop-ids NOR CEN \
-    --projections 22 22 \
-    --output dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.lowpass.folded.fs \
-    --calc-coverage
+# dadi-cli GenerateFs \
+#     --vcf DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf.gz \
+#     --pop-info data/nor-cen.popfile.txt \
+#     --pop-ids NOR CEN \
+#     --projections 22 22 \
+#     --output dadi_results/nor-cen/${dataset}.nor-cen.autosomes.noncoding.lowpass.folded.fs \
+#     --calc-coverage
 
+# dadi-cli GenerateFs \
+#     --vcf DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf.gz \
+#     --pop-info data/nor-cen.popfile.txt \
+#     --pop-ids NOR CEN \
+#     --projections 20 20 \
+#     --output dadi_results/nor-cen/${dataset}.nor-cen.rm_common_high_het_sites_0.8.20.20.folded.sfs \
+#     --calc-coverage

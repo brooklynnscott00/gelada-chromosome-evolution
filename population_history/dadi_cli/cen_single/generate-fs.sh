@@ -18,13 +18,16 @@ module load mamba/latest
 source scripts/_include_options.sh
 source activate /scratch/nsnyderm/conda_env/dadi-gpu
 
+haplotypes='20,18,16,14,12,10'
+haplotype=$(echo "${haplotypes}" | cut -d',' -f${SLURM_ARRAY_TASK_ID})
+
 mkdir -p dadi_results
 mkdir -p dadi_results/central
 
 dadi-cli GenerateFs \
-    --vcf vcf/central.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf.gz \
+    --vcf DI-vcf/central.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf.gz \
     --pop-info data/central.popfile.txt \
     --pop-ids CEN \
-    --projections 22 \
-    --output dadi_results/central/${dataset}.central.autosomes.noncoding.lowpass.folded.fs \
+    --projections ${haplotype} \
+    --output dadi_results/central/${dataset}.central.autosomes.${haplotype}.noncoding.rm_common_high_het_sites_0.8.lowpass.folded.fs \
     --calc-coverage

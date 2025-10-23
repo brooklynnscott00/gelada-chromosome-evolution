@@ -22,7 +22,7 @@ $sbatch --time=4:00:00 --array=1-947 wgs_processing/02_gatk-genotype.sh
 run gatk-genotype in parallel twice- this script is designed to be run over and over until every job (region) has successfully completed. It is expected that many jobs will fail the first time due to not completing both steps. Resubmitting will cause these jobs to resume starting with the second step only. 
 
 ```shell
-$sbatch wgs_processing/03_gatk-filter.sh
+$sbatch --time=4:00:00 wgs_processing/03_gatk-filter.sh
 $sbatch --array=1-22 wgs_processing/04_bcftools-concat.sh
 ```
 filter variants and concat
@@ -30,7 +30,15 @@ filter variants and concat
 ```shell
 $sbatch --array=1-4 wgs_processing/05_bcftools-concat-final.sh
 ```
+
+sbatch --array=1-22 wgs_processing/04_bcftools-concat.sh	jobID: 33797034	**DONE**
+
 concatenate into autosomes and whole genome vcf
+
+sbatch --array=5-6 wgs_processing/05_bcftools-concat-final.sh	jobID: 33788274	**failed**
+sbatch --array=5-6 wgs_processing/05_bcftools-concat-final.sh	jobID: 33791494	**failed**
+sbatch --array=5-6 wgs_processing/05_bcftools-concat-final.sh	jobID: 33795444	**failed**
+sbatch --array=5-6 wgs_processing/05_bcftools-concat-final.sh	jobID: 33799367	**DONE**
 
 ### heterozygosity statistics
 ```shell

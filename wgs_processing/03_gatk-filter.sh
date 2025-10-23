@@ -25,3 +25,4 @@ module load bcftools-1.14-gcc-11.2.0
 parallel -j $slots scripts/gatk-filter-variants-single.sh {1} ::: $(eval echo -e {1..$(wc -l data/${genome}_regions.txt | cut -d ' ' -f 1)})
 
 exit
+ 
