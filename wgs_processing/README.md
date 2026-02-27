@@ -6,17 +6,17 @@ Scripts in this folder perform genotypes from population resequncing data. These
 ```shell
 $sbatch --time=4:00:00 --mem=24G --partition=htc --array=1-149 wgs_processing/run-mosdepth.sh
 $sbatch --time=4:00:00 --mem=8G --partition=htc --array=1-149 wgs_processing/samtools-coverage.sh
+$sbatch --array=1-149 wgs_processing/subset_bams.sh
 ```
- 
+
 ### GATK Analysis pipeline
 
 ```shell
-$sbatch --time=7-00:00:00 --array=1-149 wgs_processing/01_gatk-call.sh
+$sbatch --time=7-00:00:00 --array=1-149 wgs_processing/01_gatk-call.sh # 42414469,42414877,42588438
 ```
-run gatk in parallel to call variants for each sample 
 
 ```shell
-$sbatch --time=4:00:00 --array=1-947 wgs_processing/02_gatk-genotype.sh   
+$sbatch --time=4:00:00 --array=1-947 wgs_processing/02_gatk-genotype.sh
 $sbatch --time=4:00:00 --array=1-947 wgs_processing/02_gatk-genotype.sh
 ```
 run gatk-genotype in parallel twice- this script is designed to be run over and over until every job (region) has successfully completed. It is expected that many jobs will fail the first time due to not completing both steps. Resubmitting will cause these jobs to resume starting with the second step only. 
@@ -39,6 +39,12 @@ sbatch --array=5-6 wgs_processing/05_bcftools-concat-final.sh	jobID: 33788274	**
 sbatch --array=5-6 wgs_processing/05_bcftools-concat-final.sh	jobID: 33791494	**failed**
 sbatch --array=5-6 wgs_processing/05_bcftools-concat-final.sh	jobID: 33795444	**failed**
 sbatch --array=5-6 wgs_processing/05_bcftools-concat-final.sh	jobID: 33799367	**DONE**
+
+
+
+sbatch --array=1 wgs_processing/05_bcftools-concat-final.sh	jobID: 44318399
+sbatch --array=2-6 wgs_processing/05_bcftools-concat-final.sh	jobID: 44318431
+sbatch --array=1-4 wgs_processing/05_bcftools-concat-final.sh	jobID: 44318655
 
 ### heterozygosity statistics
 ```shell

@@ -36,19 +36,3 @@ awk '$1=="CHR"{next}
   if(n>0 && (a[2]/n) >= 0.8) printf "%s\t%s\t%.6f\n",$1,$2,(a[2]/n);
 }' DI-vcf/${population}.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.hardy.weir.fst.hwe \
 > DI-vcf/${population}.high_het_sites_0.8.tsv
-
-awk '$1=="CHR"{next}
-{
-  split($3,a,"/");
-  n = a[1]+a[2]+a[3];
-  if(n>0 && (a[2]/n) >= 0.9) printf "%s\t%s\t%.6f\n",$1,$2,(a[2]/n);
-}' DI-vcf/${population}.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.hardy.weir.fst.hwe \
-> DI-vcf/${population}.high_het_sites_0.9.tsv
-
-awk '$1=="CHR"{next}
-{
-  split($3,a,"/");
-  n = a[1]+a[2]+a[3];
-  if(n>0 && (a[2]/n) >= 1.0) printf "%s\t%s\t%.6f\n",$1,$2,(a[2]/n);
-}' DI-vcf/${population}.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.hardy.weir.fst.hwe \
-> DI-vcf/${population}.high_het_sites_1.0.tsv

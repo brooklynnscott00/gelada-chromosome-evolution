@@ -15,26 +15,11 @@ module load htslib-1.16-gcc-11.2.0
 source scripts/_include_options.sh
 mkdir -p DI-vcf/
 
-# vcftools --gzvcf DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf.gz \
-# 	--recode \
-# 	--out DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8 \
-# 	--exclude-positions DI-vcf/northern-central.common_high_het_sites_0.8.tsv \
-# 
-# mv DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.recode.vcf DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf
-# bgzip DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf
-
-vcftools --gzvcf DI-vcf/northern.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf.gz \
+vcftools --gzvcf DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf.gz \
 	--recode \
-	--out DI-vcf/northern.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8 \
+	--out DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8 \
 	--exclude-positions DI-vcf/northern-central.common_high_het_sites_0.8.tsv \
 
-mv DI-vcf/northern.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.recode.vcf DI-vcf/northern.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf
-bgzip DI-vcf/northern.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf
+mv DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.recode.vcf DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf
+bgzip DI-vcf/nor-cen.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf
 
-vcftools --gzvcf DI-vcf/central.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.vcf.gz \
-	--recode \
-	--out DI-vcf/central.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8 \
-	--exclude-positions DI-vcf/northern-central.common_high_het_sites_0.8.tsv \
-
-mv DI-vcf/central.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.recode.vcf DI-vcf/central.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf
-bgzip DI-vcf/central.quality-filtered.autosomes_only.rm_repeats.rm_exons_10k_extended.rm_common_high_het_sites_0.8.vcf

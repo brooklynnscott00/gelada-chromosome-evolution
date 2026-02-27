@@ -21,29 +21,5 @@ source activate /scratch/nsnyderm/conda_env/dadi-gpu
 mkdir -p dadi_results
 mkdir -p dadi_results/plots/
 
-# assign chromosome number to slurm array ask ID
-populations="
-nor-cen,cen-sou
-"
-population=$(echo "$populations" | tr -d '\n\r' | cut -d',' -f${SLURM_ARRAY_TASK_ID})
-
-#dadi-cli Plot --fs dadi_results/${population}/dadi.${population}.autosomes.noncoding.lowpass.folded.fs \
-#	--output dadi_results/plots/${dataset}.${population}.autosomes.noncoding.lowpass.folded.fs.pdf
-
-# dadi-cli Plot --fs dadi_results/simulation/IM.simDM.fs \
-# 	--output dadi_results/plots/dadi.IM.simDM.fs.pdf
-# 
-# dadi-cli Plot --fs dadi_results/simulation/IM.simDM.fs \
-# 	--fs2 dadi_results/nor-cen/dadi.nor-cen.autosomes.noncoding.lowpass.folded.fs \
-# 	--output dadi_results/plots/dadi.nor-cen.autosomes.noncoding.vs.IM.simDM.pdf \
-# 	--model None
-
-# dadi-cli Plot --fs dadi_results/nor-cen/${dataset}.nor-cen.rm_common_high_het_sites_0.8.folded.sfs \
-# 	--output dadi_results/plots/${dataset}.${population}.autosomes.noncoding.rm_common_high_het_sites_0.8.lowpass.folded.fs.pdf
-
-dadi-cli Plot --fs dadi_results/cen-sou/${dataset}.cen-sou.20.6.autosomes.noncoding.lowpass.folded.fs \
-	--output dadi_results/plots/${dataset}.cen-sou.20.6.autosomes.noncoding.lowpass.folded.fs.pdf
-
-dadi-cli Plot --fs dadi_results/cen-sou/${dataset}.cen-sou.autosomes.noncoding.rm_common_high_het_sites_0.8.20.6.lowpass.folded.fs \
-	--output dadi_results/plots/${dataset}.cen-sou.autosomes.noncoding.rm_common_high_het_sites_0.8.20.6.lowpass.folded.fs.pdf
-
+dadi-cli Plot --fs dadi_results/dadi.nor-cen.rm_common_high_het_sites_0.8.20.20.folded.sfs \
+	--output dadi_results/dadi.nor-cen.rm_common_high_het_sites_0.8.20.20.folded.sfs.pdf

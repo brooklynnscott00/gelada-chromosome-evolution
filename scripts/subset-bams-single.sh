@@ -1,15 +1,22 @@
 #!/bin/bash
 
-# Read in first argument and assign a more readable variable name
-line_number=$1
+i=$1
+j=$2
 
-input_file_path=$(cut -f 3 data/sample_region_list_final.txt | sed -n ${line_number}p)
-sample_name=$(cut -f 2 data/sample_region_list_final.txt | sed -n ${line_number}p)
-chr=$(cut -f 1 -d : data/sample_region_list_final.txt | sed -n ${line_number}p)
-region=$(cut -f 2 -d : data/sample_region_list_final.txt | cut -f 1 | sed -n ${line_number}p)
+source scripts/_include_options.sh
 
-mkdir -p sample_region_bams
+int=$(printf %04d $(grep -n $j data/tgel1_regions.txt | cut -d ':' -f 1))
+chr=$(printf %02d $(grep -n $(echo $j | cut -d ':' -f 1) /data/CEM/smacklab/gelada_project/assemblies/tgel1/Tgel_1.0.dna.fa.fai | cut -d ':' -f 1))
 
-samtools view \
-        -o sample_region_bams/${sample_name}_${chr}.${region}.bam -hb $input_file_path \
-        ${chr}:${region}
+mkdir -p bam
+
+# echo /data/CEM/smacklab/gelada_project/bam-sorted/tgel1/${i}.aligned-tgel1.sorted.mkdups.bam ${j}
+# echo sample_region_bams/${i}_${chr}.${int}.bam
+
+if [[ ! -f "/data/CEM/smacklab/gelada_project/bam-sorted/tgel1/${i}.aligned-tgel1.sorted.mkdups.bam" ]]; then
+    echo "ERROR: BAM file not found" >&2
+    exit 1
+fi
+
+samtools view -b /data/CEM/smacklab/gelada_project/bam-sorted/tgel1/${i}.aligned-tgel1.sorted.mkdups.bam ${j} > sample_region_bams/${i}_${chr}.${int}.bam
+samtools index -b sample_region_bams/${i}_${chr}.${int}.bam

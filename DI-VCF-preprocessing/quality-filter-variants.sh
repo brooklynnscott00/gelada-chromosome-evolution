@@ -5,7 +5,7 @@
 #SBATCH --job-name='filter variants'
 #SBATCH --output=out/slurm-%A_%a.out
 #SBATCH --error=out/slurm-%A_%a.err
-#SBATCH --partition=general
+#SBATCH --partition=public
 #SBATCH --qos=public
 #SBATCH --time=24:00:00
 #SBATCH --mem=32G
@@ -31,11 +31,29 @@ if [ "$SLURM_ARRAY_TASK_ID" -eq 1 ]; then
 		--filter-name "SOR" \
 		--filter "SOR > 3.0" \
 		--missing-values-evaluate-as-failing
-else
+elif [ "$SLURM_ARRAY_TASK_ID" -eq 2 ]; then
 	java -jar ~/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar VariantFiltration \
 		--reference /scratch/brscott4/gelada/data/genome/${genome_path} \
 		--output  DI-vcf/cen-sou.quality-filtered.vcf.gz \
 		--variant  DI-vcf/cen-sou.vcf.gz \
+		--filter-name "QD" \
+		--filter "QD < 2.0" \
+		--filter-name "MQ" \
+		--filter "MQ < 40.0" \
+		--filter-name "FS" \
+		--filter "FS > 60.0" \
+		--filter-name "MQRS" \
+		--filter "MQRankSum < -12.5" \
+		--filter-name "RPRS" \
+		--filter "ReadPosRankSum < -8.0" \
+		--filter-name "SOR" \
+		--filter "SOR > 3.0" \
+		--missing-values-evaluate-as-failing
+else
+	java -jar ~/gatk-4.2.5.0/gatk-package-4.2.5.0-local.jar VariantFiltration \
+		--reference /data/CEM/smacklab/gelada_project/assemblies/tgel1/${genome_path} \
+		--output  DI-vcf/nor-sou.quality-filtered.vcf.gz \
+		--variant  DI-vcf/nor-sou.vcf.gz \
 		--filter-name "QD" \
 		--filter "QD < 2.0" \
 		--filter-name "MQ" \

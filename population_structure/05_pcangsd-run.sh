@@ -11,7 +11,6 @@
 #SBATCH --mem=0
 
 module load mamba/latest
-
 source activate /data/CEM/smacklab/libraries/python/.conda/envs/angsd
 
 mkdir -p stats/pcangsd-glo

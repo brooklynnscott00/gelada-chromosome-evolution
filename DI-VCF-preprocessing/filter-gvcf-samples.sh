@@ -5,7 +5,7 @@
 #SBATCH --job-name="filter gvcf for cohorts"
 #SBATCH --output=out/slurm-%A_a.out
 #SBATCH --error=out/slurm-%A_%a.err
-#SBATCH --partition=general
+#SBATCH --partition=public
 #SBATCH --qos=public
 #SBATCH --time=24:00:00
 #SBATCH --mem=32G
@@ -17,6 +17,9 @@ mkdir -p gvcf
 
 if [ "$SLURM_ARRAY_TASK_ID" -eq 1 ]; then
 	bcftools view --samples-file data/dadi.sample_list.NOR.CEN.txt -O z -o DI-gvcf/nor-cen.cohort.g.vcf DI-gvcf/cohort.g.vcf.gz
-else
+elif [ "$SLURM_ARRAY_TASK_ID" -eq 2 ]; then
 	bcftools view --samples-file data/dadi.sample_list.CEN.SOU.txt -O z -o DI-gvcf/cen-sou.cohort.g.vcf DI-gvcf/cohort.g.vcf.gz
+elif [ "$SLURM_ARRAY_TASK_ID" -eq 3 ]; then
+	bcftools view --samples-file data/dadi.sample_list.NOR.SOU.txt -O z -o DI-gvcf/nor-sou.cohort.g.vcf DI-gvcf/cohort.g.vcf.gz
+else 
 fi

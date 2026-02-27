@@ -5,7 +5,7 @@
 #SBATCH --job-name="filter gvcf for autosomes"
 #SBATCH --output=out/slurm-%A_%a.out
 #SBATCH --error=out/slurm-%A_%a.err
-#SBATCH --partition=general
+#SBATCH --partition=public
 #SBATCH --qos=public
 #SBATCH --time=4-00:00:00
 #SBATCH --mem=128G
@@ -26,8 +26,9 @@ mkdir -p vcf
 
 if [ "$SLURM_ARRAY_TASK_ID" -eq 1 ]; then
 	bcftools view --regions ${regions} -O z -o vcf/cen-sou.quality-filtered.autosomes_only.vcf.gz vcf/cen-sou.quality-filtered.vcf.gz
-	bcftools view --regions ${regions} -O z -o gvcf/cen-sou.cohort.autosomes_only.g.vcf gvcf/cen-sou.cohort.g.vcf.gz
-else
+elif [ "$SLURM_ARRAY_TASK_ID" -eq 2 ]; then
 	bcftools view --regions ${regions} -O z -o vcf/nor-cen.quality-filtered.autosomes_only.vcf.gz vcf/nor-cen.quality-filtered.vcf.gz
 	bcftools view --regions ${regions} -O z -o gvcf/nor-cen.cohort.autosomes_only.g.vcf gvcf/nor-cen.cohort.g.vcf.gz
+else 
+	bcftools view --regions ${regions} -O z -o DI-vcf/nor-sou.quality-filtered.autosomes_only.vcf.gz DI-vcf/nor-sou.quality-filtered.vcf.gz
 fi

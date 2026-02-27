@@ -10,5 +10,14 @@
 #SBATCH --time=4:00:00
 #SBATCH --mem=24G
 
-cat DI-gvcf/cen-sou.cohort.autosomes_only.g.vcf.gz | awk '!/^#/ {print $1, $2-1, $2}' OFS="\t" > DI-gvcf/cen-sou.cohort.autosomes_only.g.bed
 cat DI-gvcf/nor-cen.cohort.autosomes_only.g.vcf.gz | awk '!/^#/ {print $1, $2-1, $2}' OFS="\t" > DI-gvcf/nor-cen.cohort.autosomes_only.g.bed
+
+module load bedtools2-2.30.0-gcc-11.2.0
+
+bedtools merge -i DI-gvcf/nor-cen.cohort.autosomes_only.g.bed > DI-gvcf/nor-cen.cohort.autosomes_only.merged.g.bed
+
+bedtools subtract -a DI-gvcf/nor-cen.cohort.autosomes_only.merged.g.bed -b DI-vcf/nor-cen.low_quality_mask.bed \
+  | bedtools subtract -a stdin -b /scratch/brscott4/gelada/data/genome/Theropithecus_gelada.Tgel_1.0.dna_rm_reindexed_refseq.bed \
+  | bedtools subtract -a stdin -b /scratch/brscott4/gelada/data/genome/Theropithecus_gelada.Tgel_1.0.110_reindexed_refseq_exons_10k_extended.gtf.gz > \
+  DI-gvcf/nor-cen.cohort.autosomes_only.merged.pass.rm_repeats.rm_exons_10k_extended.g.bed
+

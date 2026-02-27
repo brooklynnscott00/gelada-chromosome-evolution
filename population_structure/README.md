@@ -42,6 +42,17 @@ for i in $(cut -f 1 /scratch/brscott4/gelada/data/genome/Theropithecus_gelada.Tg
 	echo $i; cat rmrep-glo/angsd_noheader-glo_genolike_region_${i}_*_rmrep.beagle.gz > angsd_chr-glo/angsd_genolike_${i}.beagle.gz
 done
 ```
+```shell
+mkdir -p angsd_final-nor
+mkdir -p angsd_final-cen
+mkdir -p angsd_final-sou
+
+cat angsd_noheader-nor/* > angsd_final-nor/angsd_genolike_northern.beagle.gz
+cat angsd_noheader-cen/* > angsd_final-cen/angsd_genolike_central.beagle.gz
+cat angsd_noheader-sou/* > angsd_final-sou/angsd_genolike_southern.beagle.gz
+
+```
+Combine per population angsd files 
 
 thin variants 10000bps
 ```shell
@@ -69,3 +80,10 @@ Plot
 ```shell
 06_angsd-plot.R
 ```
+
+### angsd Fst 
+
+sbatch population_structure/angsd-make-saf.sh
+jobID: 46350522 **failed**
+jobID: 46357515    **failed**
+jobID: 46581775
