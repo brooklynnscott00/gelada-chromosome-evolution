@@ -1,3 +1,10 @@
+figures/
+.RData
+asymmetry_binom_summary_minimal.tsv
+asymmetry_binom_summary_minimal.tsv
+binom_enrichment_with_CI.tsv
+binom_enrichment_with_CI.tsv
+iterate.dat
 data/
 gvcf-all/
 angsd_final-cen/
